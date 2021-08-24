@@ -1,0 +1,138 @@
+CIS 301. Logical Foundations of Programming.
+
+Julie Thornton.
+
+What is this class?
+- logical reasoning
+- proofs (why?)
+- basics of proving correctness of programs (why?)
+
+
+Units.
+- Logical reasoning and puzzles
+- Propositional logic
+- Predicate logic
+- Programming logic
+
+
+Syllabus.
+
+Canvas setup.
+
+///////////////////////////////////////////////////////////////
+
+What is logic?
+
+- analysis of an argument according to a set of rules
+- given a set of premises (and sometimes a conclusion)
+
+
+- we determine if the conclusion is valid when we assume the
+premises are all true
+
+OR...
+
+- we determine what a valid conclusion is given that the
+premises are true
+
+
+Note that the premises might make no sense!
+
+///////////////////////////////////////////////////////////////
+
+Premise 1: If a person wears a red shirt, then they don’t like pizza.
+Premise 2: Fred is wearing a red shirt.
+Conclusion: Fred doesn’t like pizza.
+
+Is this a valid argument? Yes!
+
+
+//////////////////////////////////////////////////////////////
+
+Logical Arguments with ”OR”
+
+”Or” in logic is like an ”or” in programming
+– as long as at least one item is true the overall statement is true.
+
+Premise 1: I have a dog or I have a cat.
+Premise 2: I do not have a cat.
+
+What can I conclude? I have a dog.
+
+
+/////////////////////////////////////////////////////////////
+
+I have a bike or I have a car.
+I do not have a bike.
+
+
+What can I conclude? I have a car.
+
+
+/////////////////////////////////////////////////////////////
+
+What rule are we seeing with an ”or” statement,
+where we know that one of the statements is NOT true?
+
+the other statement is true
+
+//////////////////////////////////////////////////////////////
+
+I have a bike or I have a car.
+I have a bike.
+
+What can I conclude? I may or may not have a car.
+
+
+////////////////////////////////////////////////////////////
+
+I either have a bike or a car, but not both.
+I have a bike.
+
+What can I conclude? I don't have a car.
+
+
+///////////////////////////////////////////////////////////
+
+Logical Arguments with ”IF/THEN” (also called "implies" -> )
+
+If it is raining, then I will get wet.
+It is raining.
+
+What can I conclude? I will get wet.
+
+
+/////////////////////////////////////////////////////////
+
+If I don’t hear my alarm, then I will be late for class.
+I don’t hear my alarm.
+
+What can I conclude? I'll be late for class.
+
+
+/////////////////////////////////////////////////////////
+
+What rule are we seeing with an ”if/then” statement,
+where we know that the ”if” part IS true?
+
+We can always conclude that the then part is true.
+
+////////////////////////////////////////////////////////
+
+If I don’t hear my alarm, then I will be late for class.
+I am late for class.
+
+What can I conclude? I may or may not have heard my alarm.
+
+
+///////////////////////////////////////////////////////
+
+If I don’t hear my alarm, then I will be late for class.
+I hear my alarm.
+
+What can I conclude? I could still be late. We can't conclude anything.
+
+
+/////////////////////////////////////////////////////
+
+Next: logic puzzles!
