@@ -1,0 +1,396 @@
+HW 1 due Thursday, September 2
+
+//////////////////////////
+
+Write truth table in Logika:
+
+p -> q V !r ^ p
+
+!, ^, V, ->
+
+
+///////////////////////////
+
+Write truth table in Logika:
+
+p V q ^ r ^ q -> !p
+
+try this one on your own
+
+!
+the left ^
+the right ^
+the V
+the ->
+
+top-level (last applied) operator: ->
+
+if Tautology or Contradictory
+
+don't have to put the T/F entries afterwards
+
+//////////////////////////
+
+Equivalent statements
+
+p -> q
+!p V q
+!q -> !p
+
+**what would be sample English statements?
+
+p: I stay up late
+q: I will be tired
+
+p -> q
+If I stay up late, then I will be tired.
+
+!p V q
+I don't stay up late and/or I am tired.
+
+!q -> !p
+If I'm not tired, then I didn't stay up late.
+
+How could we show they were equivalent with truth tables?
+
+
+//////////////////////////
+
+Propositional logic
+- a set of propositions (statements that can be T/F)
+- connected by logical operators
+
+To translate:
+1) Identify all propositional atoms in the sentence,
+    assign letters to them
+2) Make sure propositional atoms don't include logical
+    operators (like "not")
+3) Translate to propositional statements with appropriate
+    operators
+
+
+
+
+//////////////////////////
+
+Negation (NOT): look for "un", "ir", "not" in sentence
+
+**Example: I am not going to work today.
+
+Atom:
+p: I am going to work today.
+
+Translation:
+!p
+
+
+
+
+
+
+
+//////////////////////////
+
+Conjunction (AND): look for "and", "but", "however",
+    "moreover", "nevertheless", etc.
+
+
+
+**Example: I am hungry and thirsty.
+
+Atoms:
+p: I am hungry
+q: I am thirsty
+
+Translation:
+p ^ q
+
+
+
+**Example: I am short but John is not tall.
+
+Atoms:
+p: I am short
+q: John is tall
+
+Translation:
+p ^ !q
+
+
+
+
+//////////////////////////
+
+Disjunction (OR): look for "or", interpret whether the or
+is inclusive or exclusive. Usually inclusive.
+
+
+
+**Example: You can watch a movie and/or eat a snack.
+
+Atoms:
+p: You can watch a movie
+q: You can eat a snack
+
+Translation:
+p V q
+
+
+
+
+
+**Example: You can have chips or fries, but not both.
+
+Atoms:
+p: You can have chips
+q: You can have fries
+
+Translation:
+(p V q) ^ !(p ^ q)
+
+
+
+
+
+
+
+
+**Example: Fred neither washed the car nor
+    went to the mechanic.
+
+Atoms:
+p: Fred washed the car
+q: Fred went to the mechanic
+
+Translation:
+
+!(p V q)
+
+!p ^ !q
+
+
+
+**In this class, it's safe to assume "or" is inclusive
+    unless otherwise clearly specified.
+
+///////////////////////////////////////////
+
+Implication (IMPLIES): look for "if...then", "provided...then",
+    "only...", "given...", "assuming...", "unless..."
+
+**Pay attention to what is being promised, like:
+    (given this condition) -> (we can infer this conclusion)
+
+
+
+
+**Example: If it is hot today, then I'll get ice cream.
+
+Atoms:
+p: It is hot today
+q: I'll get ice cream
+
+Translation:
+p -> q
+
+
+
+
+
+**Example: You can login to a CS lab computer if you have
+    a CS account.
+
+Atoms:
+p: You can login to a CS computer
+q: you have a CS account
+
+Translation:
+
+q -> p
+
+
+
+
+
+
+
+**Example: Wilma eats cookies only if Evelyn makes them.
+
+Atoms:
+p: Wilma eats cookies
+q: Evelyn makes cookies
+
+Translation:
+p -> q
+
+
+
+
+
+
+**Example: I will go to the beach unless it is raining.
+
+Atoms:
+p: I will go to the beach
+q: It is raining
+
+Translation:
+if it isn't raining, I promise I'll go to the beach
+
+!q -> p
+
+!p -> q
+
+
+
+
+
+
+
+
+
+
+**Example: If it is nice tomorrow, then I'll go for a run,
+    but only if I don't feel tired.
+
+Atoms:
+p: It is nice tomorrow
+q: I'll go for a run
+r: I feel tired
+
+Translation:
+
+(p ^ !r) -> q
+
+
+
+
+
+
+**Example: If it snows today, I will go sledding;
+    otherwise, I'll stay inside.
+
+Atoms:
+p: It snows today
+q: I will go sledding
+r: I'll stay inside
+
+Translation:
+
+(p -> q) ^ (!p -> r)
+
+
+
+
+
+
+
+
+**Example: I will not like radishes unless my tastes change
+    or I learn to cook them in another way.
+
+Atoms:
+p: I like radishes
+q: My tastes change
+r: I learn to cook them in another way
+
+Translation:
+
+!(q V r) -> !p
+
+
+
+
+
+
+//////////////////////////////////
+Summary:
+
+p: I swim
+q: It is hot
+
+
+IF p THEN q:
+    if I swim, then it is hot
+
+    p -> q
+
+
+p ONLY IF q:
+    I swim only if it is hot
+
+    !q -> !p
+    p -> q
+
+p IF q:
+    I swim if it is hot
+
+    q -> p
+
+p UNLESS q:
+    I swim unless it is hot
+
+    !q -> p
+    !p -> q
+
+//////////////////////////////////
+
+Contrapositive.
+
+p->q is logically equivalent to !q->!p
+
+
+//////////////////////////////////
+
+Implication as a disjunction.
+
+p->q is logically equivalent to !p V q
+
+
+
+
+...BUT! We should still build our translations to match
+the English sentence as well as we can.
+
+
+////////////////////////////////////
+
+Knights and knaves with truth tables
+
+Eve says, ”I am a knave or Fred is a knight.”
+
+Eve knight, Fred, knight
+
+e, f
+e - e is a knight
+!e - e is knave
+f - f is a knight
+!f - fred is a knave
+
+e -> (!e V f)
+!e -> !(!e V f)
+
+(e -> (!e V f)) ^ (!e -> !(!e V f))
+
+
+
+
+
+/////////////////////////
+
+Ava says that Bob is a knave.
+Bob says, ”Neither Ava nor I are knaves.”
+
+a: Ava is a knight (!a: Ava is a knave)
+b: Bob is a knight (!b: Bob is a knave)
+
+a -> !b
+!a -> !!b
+b -> !(!a V !b)
+!b -> !!(!a V !b)
+
+statement: (a -> !b) ^ (!a -> !!b) ^ (b -> !(!a V !b)) ^ (!b -> !!(!a V !b))
+
+////////////////////////
+
+Next: intro to propositional logic proofs
