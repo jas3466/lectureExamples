@@ -1,0 +1,113 @@
+HW 2 due Thurs Sep 9
+
+Exam 1 is Tues Sep 14
+
+We will review for Exam 1 on Thursday
+
+////////////////////////////////////////////
+OR-elimination, Ve
+
+
+      P V Q   {P assume    {Q assume
+                ... R}       ... R}
+Ve : ---------------------------------
+                    R
+
+What is the idea?
+
+
+How does this relate to programming?
+
+if (condition) {
+    some result
+}
+else {
+    some result
+}
+
+condition V !condition,
+    prove some result
+
+//////////////////////
+
+Logika examples
+
+p ∨ p ⊢ p DONE
+
+p V q |- (p V r) V (q V r) DONE
+
+(p ∨ q) ^ r ⊢ (p ∧ r) ∨ (q ∧ r) DONE
+
+(p ∧ r) ∨ (q ∧ r) |- (p V q) ^ r
+
+(p ∨ q) ∧ (p ∨ r) ⊢ p ∨ (q ∧ r) DONE
+
+p V (q ^ r) |- (p ∨ q) ∧ (p ∨ r)
+
+
+/////////////////////////////////////
+
+Strategy for using V-e
+
+/////////////////////////////////////
+
+Implies-elimination, ->e
+
+      P, P -> Q
+->e: -----------
+        Q
+
+///////////////////////////////////
+
+English example:
+
+If it is hot, then I will go swimming.
+It is hot.
+
+Conclusion?
+
+How does this relate to programming?
+
+//////////////////////////////////
+
+Logika examples;
+
+(p ∧ q) → r,  p → q,  p  ⊢  r
+(p ∨ q) → r,  q ⊢  r
+
+////////////////////////////////
+
+Strategy for using ->e
+
+/////////////////////////////////
+
+Implies-introduction, ->i
+
+        {P assume
+         ... Q}
+->i:  -----------
+         P -> Q
+
+
+Idea?
+
+///////////////////////////////
+
+Logika examples.
+
+p, (q ∧ p) → r  ⊢  q → r DONE
+
+p → q,  q → r  ⊢ p → r DONE
+
+p → (q → r) ⊢  (q ∧ p) →  r
+
+q ⊢ p → (q ∧ p)
+
+p → r,  q → r  ⊢  (p ∨ q) → r
+
+p → (q → r) ⊢ (p → q) → (p → r) DONE
+
+//////////////////////////////////
+
+Strategy for using ->i
+

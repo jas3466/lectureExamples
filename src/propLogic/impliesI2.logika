@@ -1,0 +1,14 @@
+// If I'm tired, then I won't study for the test.
+// If I don't study for the test, then I'll fail the test
+// If I'm tired, then I'll fail the test
+p → q,  q → r  ⊢ p → r
+{
+    1. p -> q               premise
+    2. q -> r               premise
+    3. {
+        4. p                assume
+        5. q                ->e 1 4
+        6. r                ->e 2 5
+    }
+    7. p->r                 ->i 3
+}
