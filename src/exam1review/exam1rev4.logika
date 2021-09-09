@@ -1,0 +1,19 @@
+p -> q |- (r V p) -> (r V q)
+{
+    1. p -> q               premise
+    2. {
+        3. r V p            assume
+        4. {
+            5. r            assume
+            6. r V q        Vi1 5
+        }
+        7. {
+            8. p            assume
+            9. q            ->e 1 8
+            10. r V q       Vi2 9
+        }
+        11. r V q           Ve 3 4 7
+        //want: r V q
+    }
+    12. (r V p) -> (r V q)  ->i 2
+}

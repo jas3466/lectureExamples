@@ -1,0 +1,172 @@
+HW 2 is due at midnight tonight
+
+HW 3 will be posted this afternoon
+    - due Thursday, September 16
+    - covers Ve and -> rules
+    - I recommend completing it before the exam
+
+///////////////////////////////////
+
+Exam 1 is Tuesday, September 14.
+
+During lecture (9:30-10:45 am)
+
+Closed notes/computers/Logika
+
+Please sit every other chair for exam
+
+Topics:
+- basic logical reasoning
+- logic puzzles
+- truth tables
+- translating to propositional logic
+- proofs in propositional logic (AND, OR, IMPLIES rules)
+
+Multiple choice section + open-ended section
+
+//////////////////////////////////////
+
+If it is hot, then I will swim.
+It is hot.
+What can I conclude?
+
+
+Types of multiple choice problems:
+- basic logical reasoning (like day 1)
+- logic puzzles (knights and knaves, etc.)
+- logical operator precedence
+- top-level operator
+- other truth table concepts (plugging in T/F values,
+    seeing if something is contradictory/contingent/tautology,
+    seeing whether two statements are equivalent)
+- translating an English sentence to propositional logic
+- what different proof rules do, best approaches to starting a
+    proof, what justification matches a proof step)
+
+/////////////////////////////////////
+
+Types of open-ended problems:
+- completing a truth table (including marking the top-level
+    operator and classifying the formula as contradictory/
+    contingent/tautology)
+- explaining any of the proof rules we've seen
+    - in what situation can they be used?
+    - what is the process of using them?
+    - why does the rule "make sense" as something we can do?
+- finding errors in a proof I give you
+- adding either claims or justification to complete a partial proof
+- completing full propositional logic proofs
+
+//////////////////////////////////////
+
+How to study
+
+- memorize the truth tables for all operators (!, ^, V, ->)
+- memorize the rules for order of operations
+    which operators are processed first?
+        (), !, ^, V, ->
+    if we have multiple of the same operator, which is first?
+        ^, V: left to right
+        -> right to left
+        ! right to left
+    which is the top-level operator?
+- memorize the format of Logika truth tables
+- memorize the usage of all proof rules we've covered
+    ^i, ^e1, ^e2, Vi1, Vi2, Ve, ->e, ->i
+    look at online "proof guide"
+- finish HW 3 before the exam
+- complete all quiz problems
+- rework homework problems without looking at the solutions
+- rework all examples from lecture (without looking at solutions)
+
+/////////////////////////////////////////
+
+Review problems.
+
+/////////////////////////////////
+
+Logical reasoning.
+    If I get a cheeseburger, then I'll get fries.
+
+What if I get a cheeseburger?
+    I can conclude that I will get fries
+What if I have fries?
+    I can't conclude anything
+What if I don't have a cheeseburger?
+    I can't conclude anything
+What if I don't have fries?
+    I didn't get a cheeseburger
+
+//////////////////////////
+
+Logic puzzle.
+
+Alice says: "I am a knight or Bob is a knave."
+Bob says: "Alice is a knight and Carla is a knave."
+Carla says: "Bob and I are not the same type."
+
+    suppose Alice is a knight.
+        suppose Bob is a knight. Then Carla must be a knave. NO!
+        suppose Bob is a knave. Then Carla must be a knight.
+
+What type is Alice? knight
+What type is Bob? knave
+What type is Carla? knight
+
+
+(be familiar with the other types of logic puzzles we covered, too)
+
+/////////////////////////
+
+Truth table.
+
+!p ^ r -> r V p
+
+
+/////////////////////////
+
+Translate to propositional logic.
+
+If it snows, then it will be wet or icy (but not both).
+
+p: it snows
+q: it will be wet
+r: it will be icy
+
+p -> ((q V r) ^ !(q ^ r))
+
+///////
+
+I will not go to Europe unless (maybe if) I renew my passport.
+
+p: I will go to Europe
+q: I renew my passport
+
+!q -> !p
+
+p -> q
+
+///////
+
+I'm not hungry or thirsty, but if I see a cookie, I'll eat it.
+
+p: I'm hungry
+q: I'm thirsty
+r: I see a cookie
+s: I'll eat it
+
+!(p V q) ^ (r -> s)
+
+////////////////////////
+
+Proof 1.
+    (p ∧ r) ∨ (q ∧ r) |- (p V q)
+
+Proof 2.
+    p → r,  q → r  ⊢  (p ∨ q) → r
+
+Proof 3.
+    p -> q |- (r V p) -> (r V q)
+
+Proof 4.
+    r -> (p ^ q), q -> s |- (r -> p) ^ (r -> s)
