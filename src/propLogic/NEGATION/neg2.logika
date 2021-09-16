@@ -1,0 +1,11 @@
+q, p → ¬q ⊢ ¬p
+{
+    1. q                premise
+    2. p -> !q          premise
+    3. {
+        4. p            assume
+        5. !q           ->e 2 4
+        6. _|_          !e 1 5
+    }
+    7. !p               !i 3
+}

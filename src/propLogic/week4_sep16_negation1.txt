@@ -1,0 +1,197 @@
+HW 3 is due at midnight tonight
+
+I will post HW 4 later today (due next Thursday)
+
+I should have Exam 1 graded by next Tuesday
+
+//////////////////////
+
+p -> q -> r |- (p ^ q -> r) ^ (p -> (q ^ r))
+
+
+Where do we start?
+
+write down premises
+    ^ statement - break it apart
+    -> statement: if we have the LHS of ->, use ->e to get RHS
+    V statement: need to wait to use Ve until we know what we're proving
+
+look at what you're trying to prove (look at top-level operator)
+    ^ statement: will need to prove both sides separately
+        think of them as two proofs
+    V statement: only need to prove ONE of the sides
+        look at premises, see what side you're able to prove
+        use Vi to tack on the other side
+    -> statement
+        open a block, assume LHS of goal implies
+        get to RHS by end of block
+        after block, use ->i to introduce to implies
+
+
+
+//////////////////////
+
+Negation rules in propositional logic.
+
+Not-elimination:
+
+        P    !P
+!e:    ----------
+          _|_
+
+
+_|_ (underscore bar underscore) - bottom operator
+means contradiction
+
+Not-introduction:
+
+        {P assume
+          ... _|_ }
+!i:    -------------
+           !P
+
+
+Real-world examples:
+1) I am both standing and not standing
+
+What can I conclude?
+    things are bad, contradiction
+
+
+
+2) If I am awake, then I am standing.
+   I am not standing.
+
+What can I conclude? I am not awake.
+
+
+
+
+/////////////////////////
+
+Trying to prove something whose top-level operator is a NOT?
+    assume the thing IS true
+    try to get a contradiction
+    then you can conclude the thing was NOT true after all
+
+p->q, !q |- !p
+
+q, p → ¬q ⊢ ¬p
+
+p ⊢ ¬ ¬ p
+
+p → ¬q ⊢ ¬(p ∧ q)
+
+
+//////////////////////
+
+Bottom-elimination:
+
+          _|_
+_|_e:  ----------
+           R
+
+
+Proof by contradiction (reductio ad absurdum):
+
+       {!P assume
+        ... _|_}
+pbc:  ----------
+          P
+
+
+/////////////////////
+
+We will first look at more general proof by contradiction
+proofs in math. You will use this same approach in CIS 575
+to prove correctness/optimality of algorithms.
+
+
+/////////////////////
+There are infinitely many primes.
+
+Suppose not. Suppose there are a finite number of primes.
+Then I can list all the primes: p1, p2, ..., pn.
+
+Consider the number:
+    Q = p1 * p2 * ... * pn + 1
+
+p1 would not divide in evenly
+p2 would not divide in evenly
+....
+pn would not divide in evenly
+
+So Q is prime, or my list didn't include all the primes.
+Either way, contradiction.
+
+So there must be an infinite number of primes after all.
+
+
+//////////////////////
+
+The sqrt(2) is irrational.
+
+Suppose not - suppose sqrt(2) is rational.
+
+Then I can express sqrt(2) as a/b, where a and b are integers
+and a/b is reduced to lowest terms (so a and b do not share common
+factors).
+
+sqrt(2) = a/b
+
+Squaring both sides:
+
+2 = a^2 / b^2
+
+And:
+
+2b^2 = a^2
+
+Then a^2 must be even. What about a? It must also be even.
+
+Then there exists an integer i such that:
+
+2i = a
+
+Plugging into the above, we get:
+
+2b^2 = (2i)^2
+
+Then simplifying:
+
+2b^2 = 4i^2
+
+And:
+
+b^2 = 2i^2
+
+Then b^2 must also be even. Then b must also be even.
+
+This is a contradiction - a and b both have 2 as a factor, but
+they were supposed to not share any common factors.
+
+So the sqrt(2) is irrational.
+
+/////////////////////
+For all integers x and y, if x and y are odd integers,
+then there does not exist an integer z such that x^2+y^2=z^2.
+
+
+
+
+
+//////////////////////
+
+p → ⊥ ⊢  p → r
+
+p → q, q → r, ¬r ⊢ p → z
+
+¬ ¬ p ⊢ p
+
+p ∨ q, ¬p ⊢ q
+
+¬ (¬ p ∨ ¬ q)  ⊢ p ∧ q
+
+⊢ p ∨ ¬ p
+
+p → q ⊢ ¬ p ∨ q
