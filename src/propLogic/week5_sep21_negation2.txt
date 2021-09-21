@@ -1,0 +1,116 @@
+HW 4 is due Thursday, September 23
+
+HW 2 comments
+    - Considering (!p -> !q) or (q -> p) equivalent to (p -> q)
+    - Considering  “p if q” equivalent to “p only if q”
+    - Considering "unless" as "if",
+    - Misusing ^e (trying to use cases like Ve)
+        and Ve (trying to use like ^e)
+
+////////////////////////////////
+
+Exam 1 breakdown.
+
+I added 3 pts to everyone's base score.
+
+Avg: 59/80 (a 74%)
+High: 83/80 (3 students had perfect scores)
+
+A (72+): 32
+B (64-71): 8
+C (56-63): 11
+D (48-55): 15
+F (47 and below): 25
+
+//////////////////////////////
+
+Working through Exam 1
+
+//////////////////////////////
+
+Negation rules in propositional logic.
+
+Not-elimination:
+
+        P    !P
+!e:    ----------
+          _|_
+
+
+Not-introduction:
+
+        {P assume
+          ... _|_ }
+!i:    -------------
+           !P
+
+
+Bottom-elimination:
+
+          _|_
+_|_e:  ----------
+           R
+
+
+Proof by contradiction (reductio ad absurdum):
+
+       {!P assume
+        ... _|_}
+pbc:  ----------
+          P
+
+///////////////////////////
+
+¬ ¬ p ⊢ p
+
+p ∨ q, ¬p ⊢ q
+
+¬ (¬ p ∨ ¬ q)  ⊢ p ∧ q
+
+⊢ p ∨ ¬ p
+
+p → q ⊢ ¬ p ∨ q
+
+
+**Look at #6 on HW
+
+/////////////////////////
+Revisiting...how do we approach proofs?
+
+First, look at the premises:
+    - AND statements: break them apart now
+    - IMPLIES statements: if you can already use ->e, do so now
+    - NOT statements: if you already have a contradiction, use
+        !e to get a _|_
+    - everything else: keep them in mind, don't do anything yet
+
+Then, look at the conclusion (top-level operator):
+    - AND statement: will need to tackle each side separately,
+        then use ^i to put them together
+    - IMPLIES statement: immediately open a block and assume
+        the LHS of the implies. Try to get to the RHS by the
+        end of the block, and then use ->i
+        --> pretend you're starting a new proof here where your
+            goal is to prove the RHS
+    - OR statement:
+        - if you can get it with Vi from any previous
+            statement, do so now
+        - otherwise, might need a different approach
+    - NOT statement: immediately open a block and assume the
+        statement IS true. Try to get to a contradiction by
+        the end of the block, and then use !i
+        --> pretend you're starting a new proof here where your
+            goal is to get a contradiction
+
+Nothing applies?
+    - See if you have any V statements available that you
+        haven't processed. Try using Ve on them.
+        --> remember you need the same conclusion in both blocks!
+    - Might try using pbc (assume what you're trying to prove
+        ISN'T true, and try to get a contradiction)
+    - *maybe* try first putting the proof for p V !p,
+        and using Ve
+
+
+...and sometimes you have to experiment! If you're not getting
+anywhere, try a different approach.

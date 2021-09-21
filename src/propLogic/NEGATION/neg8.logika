@@ -1,0 +1,37 @@
+p V q, !p |- q
+{
+    1. p V q            premise
+    2. !p               premise
+    3. {
+        4. !q           assume
+        5. {
+            6. p        assume
+            7. _|_      !e 6 2
+        }
+        8. {
+            9. q        assume
+            10. _|_     !e 9 4
+        }
+        11. _|_         Ve 1 5 8
+        //we want to end with a _|_
+    }
+    //can conclude q
+    12. q                pbc 3
+}
+
+/*p ∨ q, ¬p ⊢ q
+{
+    1. p V q                premise
+    2. !p                   premise
+    3. {
+        4. p                assume
+        //we want q
+        5. _|_              !e 4 2
+        6. q                _|_e 5
+    }
+    7. {
+        8. q                assume
+    }
+    9. q                    Ve 1 3 7
+}
+*/

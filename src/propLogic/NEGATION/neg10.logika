@@ -1,0 +1,25 @@
+//if sequent has no premises: it is a THEOREM
+//LEM (law of the excluded middle)
+
+⊢ p ∨ ¬ p
+{
+    1. {
+        2. !(p V !p)            assume
+        3. {
+            4. p                assume
+            5. p V !p           Vi1 4
+            6. _|_              !e 5 2
+            //try to get a contradiction
+        }
+        7. !p                   !i 3
+        //we could conclude !p
+
+        //we could use Vi to get p V !p
+        8. p V !p               Vi2 7
+
+        //try to get contradiction
+        9. _|_                  !e 8 2
+    }
+    //conclude p V !p
+    10. p V !p                  pbc 1
+}
