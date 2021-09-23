@@ -1,0 +1,339 @@
+HW 4 due tonight
+
+HW 5 will be posted later today (due next Thursday)
+
+Individual tutoring is available for CIS 301:
+    https://www.k-state.edu/aac/tutoring/
+
+This is our last class on propositional logic - next week
+    we will start on predicate logic
+
+/////////////////////////////////////
+
+Revisiting...how do we approach proofs?
+
+
+First, look at the premises:
+    - AND statements: immediately use ^e to break them apart
+
+    - IMPLIES statements: can use ->e if you already have the LHS
+        otherwise, keep it in your head that if you ever do get the
+        LHS, you can use ->e to get the RHS
+
+    - NOT statements: if have both (something) and !(something),
+        can immediately get a _|_ contradiction
+        if can't use right away, make a mental note to look
+        for a contradiction with it later
+
+    - everything else: V statement
+        probably will use Ve at some point
+
+
+
+
+Then, look at the conclusion (top-level operator):
+    - AND statement: might have to separately prove each side
+        and use ^i to put them together (or might get lucky and
+        be able to do it all at once)
+
+    - IMPLIES statement: immediately open a block and assume
+        the LHS of your goal implies. You want to prove the RHS -
+        think of it like a separate proof, and look at its top-level
+        operator. After you reach RHS, use ->i to conclude implication
+
+    - OR statement: if you can ever get one of the sides, use
+        Vi to tack on the other side. More commonly, will need to
+        use Ve on some other OR statement you have.
+
+    - NOT statement: immediately open a block, assume the
+        statement IS true (no not). Try to get a contradiction.
+        Afterwards, conclude that it was NOT true after all (!i)
+
+
+
+
+Nothing applies?
+    - unused OR statements with Ve
+    - use any AND or IMPLIES statements you can use
+    - pbc. If I'm trying to prove *something*, open a block and
+        assume !(something). Try to get a contradiction.
+        Use pbc after block to conclude *something.
+    - *maybe* try first putting the proof for p V !p,
+        and using Ve
+
+
+
+...and sometimes you have to experiment! If you're not getting
+anywhere, try a different approach. Proofs are partially about
+creativity.
+
+///////////////////////////////////
+
+if and only if, iff, bi-implication
+
+p IF AND ONLY IF q
+
+(p -> q) ^ (q -> p)
+
+p <-> q
+
+either both are true or both are false
+
+
+
+
+
+
+
+////////////////////////////////////
+
+sequent
+
+turnstile operator
+
+P1, ..., Pn |- C
+
+the premises together with the conclusion is a sequent
+
+P1, ..., PN *prove* C
+
+
+
+
+
+
+///////////////////////////////////
+
+A sequent is *invalid* if there exists a truth assignment
+that makes the premises true but the conclusion false
+
+
+
+Example:
+
+p → q, r -> q |- ¬r → ¬p
+
+Is the sequent valid?
+
+T -> F is the only time an implication would be false
+
+r: F
+p: T
+q: T
+
+or, could use a truth table for premises
+
+P1 ^ ... ^ Pn
+
+could have a separate truth table for conclusion
+
+C
+
+
+
+
+///////////////////////////////////
+
+A THEOREM in propositional logic is something that is
+always true with no need for premises. For example, LEM is a theorem:
+
+|- p V !p
+
+
+The LEM theorem is p V !p.
+
+|- (theorem that you are trying to prove)
+
+//////////////////////////////////
+
+Example: prove the following theorem:
+
+(p -> q) -> ((!p -> q) -> q)
+
+
+
+
+
+///////////////////////////////////
+
+P1, ..., Pn |= C
+
+P1, ..., Pn ENTAILS C
+
+if whenever P1, ..., Pn are true in a truth table, then
+C is also true.
+
+This will happen if the truth table for
+
+(P1 ∧ P2 ∧ ... Pn ) → C
+
+is a tautology.
+
+
+
+
+/////////////////////////////////////
+
+Example: proofs with truth tables
+
+Show that the premises entail the conclusion:
+
+p V q |= (p V r) V (q V r)
+
+using ONE truth table
+
+p V q -> (p V r) V (q V r)
+
+
+
+
+
+
+
+/////////////////////////////////////
+
+When is a logical formula *satisfiable*?
+    at least one truth assignment makes the formula true
+
+What is an example that IS satisfiable?
+    anything tautology or contingent
+
+What is an example that is NOT satisfiable?
+    something contradictory
+
+How would we check?
+
+
+
+
+
+
+
+/////////////////////////////////////
+
+SOUNDNESS and COMPLETENESS of propositional logic
+
+SOUNDNESS: everything that is provable is actually true
+    - can everything deduced with proof rules also
+        be shown in truth tables?
+
+
+COMPLETENESS: everything that is true is provable
+    - can everything shown in truth tables also be deduced
+        with proof rules?
+
+
+...basically, describes that our evaluating formulae
+with truth tables is equivalent to proving them with our
+natural deduction rules.
+
+
+
+//////////////////////////////////////
+
+Propositional logic is SOUND, because whenever we use
+natural deduction to prove
+
+P1, P2, ..., Pn ⊢ q
+
+we can also use truth tables to show that
+
+(P1 ^ ... ^ Pn) -> q
+
+is a tautology
+
+
+Proof idea:
+
+^e rule lets us have p ^ q |- p
+
+
+Does p ^ q |= p?
+
+...and show this with all proof rules
+
+
+////////////////////////////////////////
+
+Propositional logic is COMPLETE, because whenever we
+use truth tables to show that
+
+(P1 ^ ... ^ Pn) -> q
+
+is a tautology (that P1, ..., Pn |= q)
+
+we can also use natural deduction to prove
+
+P1, P2, ..., Pn ⊢ q
+
+...idea involves turning each line of a proof table into a sequent
+
+relies heavily on LEM (p V !p)
+
+
+
+///////////////////////////////////////
+
+Provable equivalence
+
+Two propositional logic statements S1, S2 are
+*provably equivalent* iff:
+
+S1 |- S2, and
+S2 |- S1
+
+
+Another way of writing it:
+
+|- (S1->S2) ^ (S2->S1)
+
+
+S1  !(p ^ q)
+S2 !p V !q
+
+/////////////////////////
+
+Semantic equivalence
+
+Two propositional logic statements S1, S2 are
+    *semantically equivalent* iff:
+
+(S1 -> S2) ^ (S2 -> S1)
+
+is a tautology
+
+...or, equivalently, a truth assignment makes S1 true iff
+    it also makes S2 true (basically, that their truth table
+    values match)
+
+
+
+/////////////////////////
+
+Example:
+
+First formula: (p → ¬ q)
+Second formula: ¬ (p ∧ q)
+
+Show that they are provably equivalent
+
+Two proofs:
+
+p-> !q |- !(p ^ q)
+
+AND
+
+!(p ^ q) |- p->!q
+
+Show that they are semantically equivalent
+
+
+/////////////////////////
+
+
+How do you think Logika works?
+    ...for truth tables?
+
+    p → ¬q
+
+    ...for proofs?
