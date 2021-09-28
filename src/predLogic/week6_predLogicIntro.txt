@@ -1,0 +1,480 @@
+HW 5 due Thursday, September 30
+
+////////////////
+
+Limitations of propositional logic:
+
+All humans are mortal.
+Socrates is human.
+Therefore, Socrates is mortal.
+
+
+
+
+
+
+
+
+
+
+
+
+p: All humans are mortal
+q: Socrates is a human
+r: Socrates is mortal
+
+p, q |- r
+
+How would we prove this is propositional logic?
+
+///////////////
+
+Predicate logic:
+
+Instead of basic propositions, we will break statements into:
+
+verbs: predicates
+nouns: individuals
+quantifiers: specifying all individuals / at least one individual
+
+
+
+
+
+///////////////
+
+Domains: a set of individuals
+(then we can make claims about different domains)
+
+For example:
+    ...the domain of all animals
+    ...the domain of all people
+    ...the domain of all states
+    ...the domain of all college classes
+
+
+
+
+
+Individuals are elements within a particular domain
+
+For example:
+    "Bob" might be an individual within the domain of all people
+    "Kansas" is an individual within the domain of states
+    "CIS 301" is an individual within the domain of all college classes
+
+
+
+
+
+//////////////////
+
+Predicate:
+- a function that returns a boolean
+- can have one or many parameters
+- parameters are individuals in a particular domain
+
+A predicate will describe a characteristic of an individual, or
+a comparison between multiple individuals
+
+
+Example:
+    Domain: people
+    Maybe Alice, Bob, and Carla are individuals in the domain
+
+    isAdult(takes a person)
+    isMotherOf(person 1, person 2) - return whether person 1
+                            is the mother of person2
+
+    isTallerThan(person 1, person2) - return whether person 2
+                            is taller than person 2
+
+    isAdult(Alice) might be true
+    isAdult(Bob) might be false
+    isMotherOf(Alice, Bob) might be true
+    isMotherOf(Carla, Bob) might be false
+    isTallerThan(Carla, Alice) might true
+
+
+
+
+
+/////////////////
+
+∀ quantifier: for all (something is true FOR ALL elements in a domain)
+∃ quantifier: there exists (THERE EXISTS at least one element
+                        in a domain where something is true)
+
+∀ n P(n) means: for every individual n (in some domain), P(n) is true
+
+∃ n P(n) means: there exists at least one individual n (in some domain)
+                where P(n) is true
+
+
+Examples:
+
+1) For every integer n, n + 1 > n
+    ∀ n (n + 1) > n
+
+
+
+//////////////
+
+2) Domain: people
+
+    inCIS_301(x) - person x is in CIS 301
+    tookExam1(x) - person x took exam 1
+
+
+∀ x inCIS_301(x)  --> what does this mean?
+
+for all people, inCIS_301 is true
+All people are in CIS 301.
+
+
+
+
+
+∀ x (inCIS_301(x) ^ tookExam1(x)) --> what does this mean?
+
+
+All people are in CIS 301 and took exam 1.
+
+How would we say: all people in CIS 301 took Exam 1?
+
+∀ x (inCIS_301(x) -> tookExam1(x))
+
+All people in CIS 301 took Exam 1.
+
+
+
+What do you notice about the ∀ quantifier?
+
+usually will use an -> with it.
+
+
+
+///////////
+
+3) Domain: living things
+isMouse(x): creature x is a mouse
+inHouse(x): creature x is in the house
+
+
+What do these mean?
+
+∃ x isMouse(x)
+
+There exists a living thing that is a mouse.
+There exists a mouse.
+
+
+
+!(∃ x isMouse(x))
+
+There does not exist a mouse.
+
+
+∃ x !isMouse(x)
+
+
+There exists something that is not a mouse.
+
+
+∀ x isMouse(x)
+
+All living things are mice.
+Everything is a mouse.
+
+
+!(∀ x isMouse(x))
+
+Not all living things are mice.
+Not everything is a mouse.
+
+∀ x !isMouse(x)
+
+All living things are not mice.
+
+
+∀ x (isMouse(x) -> inHouse(x))
+
+If something is a mouse, then it is in the house.
+All mice are in the house.
+
+
+*
+
+!(∀ x (isMouse(x) -> inHouse(x)))
+
+Not all mice are in the house.
+
+
+
+∀ x (inHouse(x) -> isMouse(x))
+
+If there is a living thing in a house, then it is a mouse.
+Everything in a house is a mouse.
+
+
+!(∀ x (inHouse(x) -> isMouse(x)))
+
+Not everything in a house is a mouse.
+
+
+∃ x (isMouse(x) -> inHouse(x))
+    ...what if our domain has NO mice?
+
+There exists a living thing where if it is a mouse, it is in the house.
+
+It would ALSO be true if there were no mice. But I want there to be
+at least one mouse in the house.
+
+
+
+
+∃ x (isMouse(x) ^ inHouse(x))
+    ...what do we see about the ∃ quantifier?
+
+There exists a living thing that is a mouse and is in the house.
+There is a mouse in the house.
+
+We want to use ^ with the there exists quantifier.
+
+
+!(∃ x (isMouse(x) ^ inHouse(x)))
+
+There does not exist a mouse in the house.
+There is not a mouse in the house.
+
+
+////////////////
+
+How to translate from English to predicate logic:
+
+Every/all/each/any x: A x
+
+
+
+
+Some/at least one/there exists a/there is a: E x
+
+
+
+None.../no.../there doesn't exist: ! E x...
+
+A x !(something)
+
+
+Not every... /not all...: !A x ...
+
+E x !(something)
+
+
+
+Every P-ish x: A x P(x)
+
+
+
+Some/at least one/there exists a P-ish x:
+
+E x P(x)
+
+
+All P-ish things are Q-ish things
+
+All bunnies are fluffy.
+P(x): x is a bunny
+Q(x): x is fluffy
+
+A x P(x) -> Q(x)
+
+
+Some P-ish thing is a Q-ish thing
+P(x): x is a bunny
+Q(x): x is fluffy
+
+Some bunny is fluffy.
+
+E x P(x) ^ Q(x)
+
+
+
+No P-ish thing is a Q-ish thing
+P(x): x is a bunny
+Q(x): x is fluffy
+
+No bunny is fluffy.
+
+!(E x P(x) ^ Q(X))
+
+A x P(x) -> !Q(x)
+
+A x !(P(x) ^ Q(x)) *** I will post in Discord.
+
+All living things are not both bunnies and fluffy.
+
+
+
+
+
+*
+///////////////////////
+
+DeMorgan's laws for quantifiers
+
+There does not exist a P
+    --> how else could we write this?
+    --> two (equivalent) translations?
+
+!(E x P(x))
+A x !P(x)
+
+
+P does not hold for all x
+    --> how else could we write this?
+    --> two (equivalent) translations?
+
+!(A x P(x))
+E x !P(x)
+
+
+///////////////////
+More examples.
+
+Domain: people
+
+K(x) means x is a kid
+M(x) means x like marshmallows
+
+
+All people are kids.
+
+A x K(x)
+
+
+
+All people like marshmallows.
+
+A x M(x)
+
+
+
+All kids like marshmallows.
+
+A x (K(x) -> M(x))
+
+
+
+No kids like marshmallows.
+
+!(E x K(x) ^ M(x))
+
+A x (K(x) -> !M(x))
+
+
+Not all kids like marshmallows.
+
+!A x (K(x) -> M(x))
+
+E x (K(x) ^ !M(x))
+
+Everyone who likes marshmallows is a kid.
+
+A x (M(x) -> K(x))
+
+
+No one who likes marshmallows is a kid.
+
+A x (M(x) -> !K(x))
+
+!(E x M(x) ^ K(x))
+
+
+Some people who like marshmallows are not kids.
+
+E x (M(x) ^ !K(x))
+
+*
+
+Some kids don't like marshmallows.
+
+E x (K(x) ^ !M(x))
+
+No one likes marshmallows.
+
+A x !M(x)
+
+Anyone who doesn't like marshmallows is not a kid.
+
+A x (!M(x) -> !K(x))
+!E x (!M(x) ^ K(x)) ** I will post about this
+
+
+
+
+All people are kids who like marshmallows.
+
+A x (K(x) ^ M(x))
+
+////////////////////////
+
+Domains: courses, people
+
+Sarah is a person. <- an individual
+CIS301 is a course. <- an individual
+
+CS(y) - y is a CS course
+E(y) - y is an Engineering course
+S(x) - x is a student
+Enroll(x, y) - person x is enrolled in course y
+
+Every CS course is an Engineering course
+
+A x (CS(x) -> E(x))
+
+
+Not every Engineering course is a CS course
+
+!(A x E(x) -> CS(x))
+
+
+Sarah is a student in CIS 301, which is a CS course.
+
+S(Sarah) ^ CS(CIS301) ^ Enroll(Sarah, CIS301)
+
+
+*
+
+There is a student who is enrolled in a CS course**
+
+looking at people who are students
+looking at courses that are CS courses
+
+E x (S(x) ^ (E y (CS(y) ^ Enroll(x, y))))
+
+
+Sarah is only taking CS courses.
+
+A x (Enroll(Sarah, x) -> CS(x))
+
+!(E x (Enroll(Sarah, x) ^ !CS(x)))
+
+////////////////////////////////////////////
+
+Order of operations with quantifiers
+
+quantifiers/negation
+^
+V
+->
+
+
+A x (Enroll(Sarah, x) -> CS(x))
+
+
+Next time: more with multiple quantifiers
+
+More with domains
+
+How to express equality, number of times something happened
