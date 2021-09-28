@@ -9,16 +9,6 @@ Socrates is human.
 Therefore, Socrates is mortal.
 
 
-
-
-
-
-
-
-
-
-
-
 p: All humans are mortal
 q: Socrates is a human
 r: Socrates is mortal
@@ -51,9 +41,6 @@ For example:
     ...the domain of all people
     ...the domain of all states
     ...the domain of all college classes
-
-
-
 
 
 Individuals are elements within a particular domain
@@ -310,13 +297,7 @@ No bunny is fluffy.
 
 A x P(x) -> !Q(x)
 
-A x !(P(x) ^ Q(x)) *** I will post in Discord.
-
-All living things are not both bunnies and fluffy.
-
-
-
-
+A x !(P(x) ^ Q(x)) //YES! This one works too. Explanation in Discord.
 
 *
 ///////////////////////
@@ -408,8 +389,9 @@ A x !M(x)
 Anyone who doesn't like marshmallows is not a kid.
 
 A x (!M(x) -> !K(x))
-!E x (!M(x) ^ K(x)) ** I will post about this
+!E x (!M(x) ^ K(x))
 
+//both translations are correct - explanation in Discord
 
 
 
