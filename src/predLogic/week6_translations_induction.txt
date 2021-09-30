@@ -320,14 +320,16 @@ A x (E(x) -> (E y (H(y) ^ W(x, y))))
 //////////////////
 There is an elephant that is heavier than all hippos.
 
-
+E x (E(x) ^ A y (H(y) -> W(x, y)))
 
 
 /////////////////
 
 No hippo is heavier than every elephant.
 
+NOT (there exists a hippo that is heavier than every elephant)
 
+!(E x (H(x) ^ (A y (E(y) -> W(x, y)))))
 
 
 /////////////////
