@@ -1,0 +1,450 @@
+HW 5 due at midnight tonight
+    ...problem 3 (proof version) requires p V !p for one direction
+        in lectureNotes GitHub repo, propLogic, negation, neg10.logika
+        (although I am going to remain it to neg10_lem.logika)
+
+
+    ...when explaining the "other" way (proof or truth table), you
+        only need a short explanation. (I would complete these proofs,
+        or I would complete these truth tables and look for _)
+
+**double-check that you are submitting the /tree/(fingerprint) URL
+
+
+HW 6 will be posted later today
+    -> will involve predicate logic translations
+
+
+Today:
+    - translations with multiple quantifiers
+    - translations with equality, number of times
+    - checking statements with a small domain
+    - start predicate logic proofs
+
+////////////////////////////////
+
+Questions from Tuesday's class: Discord discussion
+
+Reminder: two quantifiers
+
+for all: something is true for all elements in my domain
+there exists: something is true for at least one element in my domain
+
+
+- different ways to type them in Logika
+
+Ctrl->Shift->Command-; and then A
+Ctrl->Shift->Command-; and then E
+
+∀ A all
+∃ E exists
+
+
+
+
+use -> with A (for all)
+use ^ with E (there exists)
+
+////////////////////////////////
+
+Translations with more than one quantifier.
+
+--> first consider multiple of the SAME quantifier
+    (multiple A "for alls" or multiple E "there exists")
+
+--> then consider mixed quantifiers (which are harder)
+
+
+Predicates (domain of shapes):
+isCircle(x): shape x is a circle
+isSquare(x): shape x is a square
+isRectangle(x): shape x is a rectangle
+biggerThan(x, y): shape x has a bigger area than shape y
+
+/////////////
+
+Some circle is bigger than some square.
+
+both are E quantifiers (E circle, E square)
+
+First version, quantifiers out front: prenex form
+
+E x E y (isCircle(x) ^ isSquare(y) ^ biggerThan(x, y))
+
+
+
+OR:
+
+Second version, quantifiers embedded: Aristotlian form
+
+E x (isCircle(x) ^ E y (isSquare(y) ^ biggerThan(x, y)))
+
+
+
+///////////
+
+Each circle is bigger than every rectangle.
+
+Quantifiers out front:
+
+all circles, all rectangles
+
+A x A y ((isCircle(x) ^ isRectangle(y) -> biggerThan(x, y)))
+
+
+
+OR:
+
+Quantifiers embedded:
+
+A x (isCircle(x) -> A y (isRectangle(y) -> biggerThan(x, y)))
+
+
+
+/////////////
+
+How might we systematically translate?
+
+Each circle is bigger than every rectangle.
+
+
+Each circle is SOMETHING
+For all circles, SOMETHING
+A x isCircle(x) -> SOMETHING(x)
+
+
+What is SOMETHING(x)?
+x is bigger than every rectangle
+for all rectangles, x is bigger than that rectangle
+for each rectangle y, x is bigger than y
+A y (isRectangle(y) -> biggerThan(x, y))
+
+
+Plug SOMETHING(x) in:
+
+A x (isCircle(x) -> A y (isRectangle(y) -> biggerThan(x, y)))
+
+
+
+/////////////
+
+There are (at least) two squares.
+
+Domain: {2x2 square, radius 3 circle, 3x4 rectangle)
+
+E x E y (isSquare(x) ^ isSquare(y) ^ (x != y))
+
+--> what is wrong? (they could be the same square)
+--> how to fix?
+
+
+/////////////
+
+There is at most one square.
+
+(hint: it's not the case that there are two)
+
+just the negation of above!
+
+!(E x E y (isSquare(x) ^ isSquare(y) ^ (x != y)))
+
+
+
+//////////
+
+Multiple quantifiers, mixed (A and E)
+
+Every circle is bigger than a square
+
+
+How might we translate?
+
+Every circle is SOMETHING
+For each circle x, SOMETHING(x)
+A x (isCircle(x) -> SOMETHING(x))
+
+What is SOMETHING(x)?
+There is a square that x (my circle) is bigger than
+There exists a square y, and x is bigger than y
+E y (isSquare(y) ^ biggerThan(x, y))
+
+
+Substituting in:
+A x (isCircle(x) -> E y (isSquare(y) ^ biggerThan(x, y))))
+
+
+
+//////////
+
+Order matters!
+
+Suppose we have this predicate:
+
+
+
+likes(x, y) : person x likes person y
+
+
+
+
+Consider these statements:
+
+A x A y likes(x, y)     vs.  A y A x likes(x, y)
+E x E y likes(x, y)     vs.  E y E x likes(x, y)
+
+
+Is there any difference between the pairs?
+
+NO! It is OK to put two of the same quantifier out front.
+
+
+What about:
+
+A x E y likes(x, y)     vs.  E y A x likes(x, y)
+
+
+A x E y likes(x, y)  : for all people, there exist a person that
+                        they like
+
+
+E y A x likes(x, y): There exist a person that everyone likes
+
+
+
+
+
+
+
+//////////////////
+
+How to translate?
+
+1) Paraphrase, to try to figure out which quantifier and
+the order of implication.
+
+Something that is a square is also a rectangle.
+
+Which quantifiers?
+
+All squares are also rectangles.
+
+
+A x (isSquare(x) -> isRectangle(x))
+
+
+
+
+isPerson(x)
+isCat(y)
+owns(x, y): x owns y
+feeds(x, y): x feeds y
+
+
+Every person who owns a cat feeds it.
+
+Which quantifiers? (which people? which cats?)
+
+For all people, they feed every cat they own.
+
+A x (isPerson(x) -> SOMETHING(x))
+
+
+
+SOMETHING(x):
+
+person x feeds all their cats
+for all cats if they are owned by person x, person x feeds them
+A y ((isCat(y) ^ owns(x, y)) -> feeds(x, y))
+
+A x (isPerson(x) -> (A y ((isCat(y) ^ owns(x, y)) -> feeds(x, y)))))
+
+
+
+2) Work from the outside in, and then plug it all together.
+--> if you have mixed quantifiers, don't list them all at the
+beginning
+
+
+
+
+
+/////////////////////////////////
+
+Domain: animals
+
+E(x): x is an elephant
+H(x): x is a hippo
+W(x, y): x weighs more than y
+
+
+/////////////////////////////////
+
+There is exactly one hippo.
+
+1) There is a hippo
+2) Any other hippo is the same one
+
+There exists a hippo, and (SOMETHING)
+E x (H(x) ^ SOMETHING(x))
+
+SOMETHING(x)
+Any other hippo is the same as x
+For all hippos y, x is the same as y
+A y (H(y) -> (x == y))
+
+
+E x (H(x) ^ (A y (H(y) -> (x == y))))
+
+
+/////////////////////////////////
+
+All elephants are heavier than all hippos.
+
+A x (E(x) -> (A y (H(y) -> W(x, y))))
+
+
+
+////////////////////
+Every elephant is heavier than some hippo.
+
+A x E(x) -> SOMETHING(x)
+
+SOMETHING(x):
+x is heavier than some hippo
+There exists a hippo y where x is heavier than y
+E y (H(y) ^ W(x, y))
+
+A x (E(x) -> (E y (H(y) ^ W(x, y))))
+
+
+//////////////////
+There is an elephant that is heavier than all hippos.
+
+
+
+
+/////////////////
+
+No hippo is heavier than every elephant.
+
+
+
+
+/////////////////
+
+Evaluating (small) domains.
+
+Domain: the animals in the lists below
+
+Hippos: Hal (3000 lbs), Helga (2800 lbs)
+Elephants: Ed (10000 lbs), Eve (2500 lbs)
+
+Evaluate:
+
+All elephants weigh more than some hippo.
+
+
+A x (E(x) -> (E y H(y) ^ W(x, y)))
+
+
+For all animals -> something
+
+x = Hal -> statement is true (F -> something)
+x = Helga -> statement is true (F -> something)
+x = Ed T-> (yes. Ed weighs more than both Hal/Helga) would be true
+x = Eve T-> (no. Eve weighs less than Hal and Helga) would be false
+
+Overall statement is false.
+
+
+
+
+What values could x have?
+
+
+
+///////////////////
+
+Intro and elimination rules for universal quantifier (for all)
+
+       { a
+        ... P(a) }
+∀i: --------------
+       ∀x P(x)
+
+//a is "fresh" (never used before)
+
+
+       ∀x P(x)
+∀e: --------------
+       P(v)
+
+//...for some specific individual v
+
+
+//////////////////////////////////
+
+Idea behind for-all elimination (∀e):
+
+
+if we know that a statement is true for ALL individuals in
+our domain
+
+...then what would we know about a specific individual in that domain?
+
+
+
+
+/////////////////////////////////
+
+Example:
+
+A x Human(x) |- Human(Socrates)
+
+
+
+
+
+...and then:
+
+A x (Human(x)->Mortal(x)), Human(Socrates) |- Mortal(Socrates)
+
+
+
+
+
+/////////////////////////////////
+
+Idea behind for-all introduction (∀i)
+
+- We know a statement holds for some arbitrary/unbound individual
+- That individual could have been anything!
+
+...so what can we say about that statement for all individuals?
+
+
+
+
+Structure involves a subproof:
+
+4. {
+    5. a            //no justification here
+    ...
+    10. P(a)        //or some combination statement
+}
+11. A x P(x)        Ai 4
+
+
+//////////////////////
+
+Examples:
+
+A n isStudent(n), A n canProgram(n) |- A n (isStudent(n) ^ canProgram(n))
+
+
+
+A x P(x) |- A y P(y)
+
+
+
+A x (P(x) -> Q(x) V R(x)), A y P(y) |- A n (Q(n) V R(n))
