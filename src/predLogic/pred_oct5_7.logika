@@ -1,0 +1,17 @@
+A x (isHealthy(x) -> isHappy(x)) |- (A x (isHealthy(x))) -> (A x (isHappy(x)))
+{
+    1. A x (isHealthy(x) -> isHappy(x) )            premise
+    2. {
+        3. (A x (isHealthy(x)))                     assume
+        4. {
+            5. a
+            6. isHealthy(a) -> isHappy(a)           Ae 1 a
+            7. isHealthy(a)                         Ae 3 a
+            8. isHappy(a)                           ->e 6 7
+            //goal: isHappy(a)
+        }
+        9. (A x (isHappy(x)))                       Ai 4
+        //goal: get to (A x (isHappy(x)))
+    }
+    10. (A x (isHealthy(x))) -> (A x (isHappy(x)))  ->i 2
+}

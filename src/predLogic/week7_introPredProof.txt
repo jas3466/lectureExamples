@@ -1,0 +1,289 @@
+HW 6 due Thursday, October 7
+
+2.logika - individual should be "China", not "Beijing"
+
+////////////////////////
+
+Elimination rule for universal quantifier (for all)
+
+
+
+
+       ∀x P(x)
+∀e: --------------
+       P(v)
+
+//...for some specific individual v
+
+
+//////////////////////////////////
+
+Idea behind for-all elimination (∀e):
+
+
+if we know that a statement is true for ALL individuals in
+our domain
+
+...then what would we know about a specific individual in that domain?
+
+
+
+
+/////////////////////////////////
+
+Example:
+
+A x (Human(x)) |- Human(Socrates)
+
+
+
+
+
+...and then:
+
+A x (Human(x)->Mortal(x)), Human(Socrates) |- Mortal(Socrates)
+
+
+
+
+
+/////////////////////////////////
+
+Introduction rule for universal quantifier (for all)
+
+       { a
+        ... P(a) }
+∀i: --------------
+       ∀x P(x)
+
+//a is "fresh" (never used before)
+
+
+
+
+//////////////////////////////////
+
+
+Idea behind for-all introduction (∀i)
+
+- We know a statement holds for some arbitrary/unbound individual
+- That individual could have been anything!
+
+...so what can we say about that statement for all individuals?
+
+
+
+
+Structure involves a subproof:
+
+4. {
+    5. a            //no justification here
+    ...
+    10. P(a)        //or some combination statement
+}
+11. A x P(x)        Ai 4
+
+
+//////////////////////
+
+Examples:
+
+A n (isStudent(n)), A n (canProgram(n)) |-
+                            A n (isStudent(n) ^ canProgram(n))
+
+
+///
+
+A x (P(x)) |- A y (P(y))
+
+
+///
+
+A x (P(x) -> Q(x) V K(x)), A y (P(y)) |- A n (Q(n) V K(n))
+
+
+///
+
+All squares are rectangles. All rectangles are trapezoids.
+Can we prove that all squares are trapezoids?
+
+isSquare(x): x is a square
+isRectangle(x): x is a rectangle
+isTrapezoid(x): x is a trapezoid
+
+A x (isSquare(x) -> isRectangle(x))
+A x (isRectangle(x) -> isTrapezoid(x))
+
+Want to prove: A x (isSquare(x) -> isTrapezoid(x))
+
+
+///
+
+Everyone who is healthy is also happy.
+Can we prove that if everyone is healthy, then everyone is happy?
+
+isHealthy(x): x is healthy
+isHappy(x): x is happy
+
+A x (isHealthy(x) -> isHappy(x))
+(A x (isHealthy(x))) -> (A x (isHappy(x)))
+
+
+///
+
+Q → ∀x P(x) ⊢ ∀x (Q → P(x))
+
+    //Q → (∀x P(x)) : If Q, then all individuals are P
+    //∀x (Q → P(x)) : For all individuals, if Q,
+                        then that individual is P
+
+    //Q: the Earth is round
+    //individuals: kids
+    // P(x): x likes ice cream
+
+Structure proof by top-level operator (from outside in) of
+    goal conclusion!
+
+
+///
+
+//Proving the other direction
+∀x (Q → P(x)) ⊢ Q → ∀x P(x)
+
+
+////////////////////////
+
+Intro and elimination rules for existential quantifier (there exists)
+
+        P(v)
+∃i: --------------
+       ∃x P(x)
+
+//v is some individual
+
+
+
+
+                { a P(a)    assume
+     ∃x P(x),    ... Q }
+∃e: ------------------------------
+                  Q
+
+//a is "fresh" (never used before)
+
+
+//////////////////////////////////
+
+Idea behind there exists-introduction (∃i):
+
+
+Human(Socrates)
+
+E x (Human(x))
+
+If we find ONE individual in a domain where a statement holds
+
+...then THERE EXISTS an individual in the domain where the
+    statement holds
+
+
+/////////////////////////////////
+
+Example:
+
+Human(Socrates) |- E x (Human(x))
+
+
+
+Example:
+
+A x (Human(x)->Mortal(x)), Human(Socrates) |- E x (Mortal(x))
+
+
+
+//////////////////////////////////
+
+Idea behind there exists-elimination (∃e):
+
+
+If we know there is at least one individual where some statement holds
+
+...then we can introduce a (or whatever) as an ALIAS for that
+    individual in a subproof
+
+    ...whatever conclusion we reach in the subproof must be true
+        overall, since a was an EXISTING individual
+
+
+
+Structure of the subproof:
+
+3. E x P (x)
+4. {
+    5. a P(a)       assume //plug into your E statement
+    ...
+    10. Q
+}
+11. Q               Ee 3 4
+
+
+
+**If you have an E statement as a premise, you almost always
+want to start with a block where you create an alias (e.g. a)
+and plug it into your E statement, as above
+
+///////////////////////////////
+
+Examples:
+
+A x (Human(x)->Mortal(x)), E x (Human(x)) |- E x (Mortal(x))
+
+
+E x (P(x)) |-E y (P(y))
+
+(*stopped here*)
+
+
+∃x (P(x) V Q(x)) ⊢ (∃x P(x)) V (∃x Q(x))
+
+
+A x (Q(x) -> H(x)), E x (P(x) ^ Q(x)) ⊢ ∃ x (P(x) ^ H(x))
+
+
+E x (!P(x) ^ !Q(x)) |- E x (!(P(x) V Q(x)))
+
+////////////////////////////
+
+Proof tactics for predicate logic
+
+- all the same guidelines for propositional logic still apply!
+    ...but often the top-level operator of premises and the
+        conclusion is a quantifier
+
+- are you trying to prove something for a particular individual?
+    -> plug that individual into any A statements using Ae
+
+- if E x P(x) is a premise, almost always want to process it first
+    - open block to introduce fresh a (alias), assume P(a).
+    - try to get to your overall conclusion Q (or whatever part
+        you're trying to prove right now) by the end of the block
+    - if you can do this, use Ee after the block to conclude Q
+    - once you have a block with an individual (maybe a), plug
+        that a into ALL for-all statements using Ae
+
+- if your conclusion is of the form A x P(x)
+    - check if any premise is also a for-all statement
+    - if it is, open a block with a fresh a, and use Ae to plug
+        a into any available premises
+    - try to get to P(a) by the end of the block
+    - after the block, use Ai to conclude A x P(x)
+
+
+...but pay attention to the top-level operator at all steps!
+Things like ->, !, V still need to be approached like in
+propositional logic.
+
+
+Next: proving common equivalences
+intro to predicate logic proofs with multiple variables/quantifiers
+

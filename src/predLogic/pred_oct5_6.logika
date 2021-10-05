@@ -1,0 +1,19 @@
+A x (isSquare(x) -> isRectangle(x)), A x (isRectangle(x) -> isTrapezoid(x))
+                        |- A x (isSquare(x) -> isTrapezoid(x))
+{
+    1. A x (isSquare(x) -> isRectangle(x))          premise
+    2. A x (isRectangle(x) -> isTrapezoid(x))       premise
+    3. {
+        4. shape
+        5. isSquare(shape) -> isRectangle(shape)    Ae 1 shape
+        6. isRectangle(shape) -> isTrapezoid(shape) Ae 2 shape
+        7. {
+            8. isSquare(shape)                      assume
+            9. isRectangle(shape)                   ->e 5 8
+            10. isTrapezoid(shape)                  ->e 6 9
+        }
+        11. isSquare(shape) -> isTrapezoid(shape)   ->i 7
+        //want: isSquare(shape) -> isTrapezoid(shape)
+    }
+    12. A x (isSquare(x) -> isTrapezoid(x)  )        Ai 3
+}

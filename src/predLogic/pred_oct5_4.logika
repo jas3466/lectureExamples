@@ -1,0 +1,9 @@
+A x (P(x)) |- A y (P(y))
+{
+    1. A x (P(x))               premise
+    2. {
+        3. october
+        4. P(october)           Ae 1 october
+    }
+    5. A y (P(y))               Ai 2
+}
