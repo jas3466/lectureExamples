@@ -1,0 +1,167 @@
+HW 6 due tonight
+
+2.logika - individual should be "China", not "Beijing"
+
+HW 7 will be posted after class
+
+/////////////////////////////
+Q → ∀x P(x) ⊢ ∀x (Q → P(x))
+
+    //Q → (∀x P(x)) : If Q, then all individuals are P
+    //∀x (Q → P(x)) : For all individuals, if Q,
+                        then that individual is P
+
+    //Q: the Earth is round
+    //individuals: kids
+    // P(x): x likes ice cream
+
+English translation?
+
+Q → (∀x P(x)): If the Earth is round, then all kids like ice cream
+
+∀x (Q → P(x)): For all kids, if the Earth is round then they like
+                ice cream.
+
+
+Hint: if we want to prove a A statement, we can
+introduce a fresh variable in a block even if we don't
+have anything to plug into yet. Then we can immediately
+open another block to prove the implication (Q->P(a))
+
+///
+
+//Proving the other direction
+∀x (Q → P(x)) ⊢ Q → ∀x P(x)
+
+Structure proof by top-level operator (from outside in) of
+    goal conclusion!
+
+////////////////////////////////////
+
+A x (Q(x) -> H(x)), E x (P(x) ^ Q(x)) ⊢ ∃ x (P(x) ^ H(x))
+
+
+
+∃x (P(x) V Q(x)) ⊢ (∃x P(x)) V (∃x Q(x))
+
+
+
+E x (!P(x) ^ !Q(x)) |- E x (!(P(x) V Q(x)))
+    (save for later)
+
+////////////////////////////
+
+Proof tactics for predicate logic
+
+- see if you can do anything right away with the premises
+    (you probably can't)
+- look at top-level operator for what you are trying to prove
+    trying to prove A x (P(x)):
+        open a block, introduce an individual (maybe a)
+        try to get to P(a) by the end of the block
+        then use Ai after the block to conclude A x (P(x))
+
+    trying to prove E x (P(x)):
+        often, you have a different E statement as a premise
+        open a block, introduce alias (a) for individual where
+            E premise held, plug a in
+        try to get to E x (P(x)) by the end of the block
+        then use Ee after the block to conclude E x (P(x))
+
+    trying to prove ->
+        open a block, assume the LHS
+        try to get to the RHS
+        use ->i to conclude LHS->RHS after the block
+
+    trying to prove !(something)
+        open a block, assume *something* (no !)
+        try to get a _|_
+        use !i after block to conclude !(something)
+
+    trying to prove ^
+        approach the two sides as separate proofs
+        use ^i to put them together
+
+    trying to prove an V
+        if you have an V in a premise: use Ve
+        if you have a E statement in a premise:
+            open block, introduce alias, plug it in
+
+
+    when you are in a subproof, think about what you are trying
+    to prove. Find its top-level operator, approach as above.
+
+pbc: proof by contradiction
+    trying to prove something
+    open a block and assume !(something)
+    try to get a contradiction
+    use pbc after block to conclude *something*
+    use as a fallback option if nothing else is working
+
+///////////////////////////////////////////////
+
+Multiple variables/quantifiers
+
+P(x, y): person x likes person y
+
+(everybody likes everybody)
+
+A x (A y (P(x, y)) |- A y (A x (P(y, x))
+
+process the premise from the outside in
+- first introduce an individual in a block,
+    plug into the x in the premise
+- next introduce a second individual in a nested block,
+    plug into the y in the premise
+
+- use Ai to build back from the inside out
+
+(every person likes someone)
+
+
+///end of class today////
+
+Next time:
+
+///////////////////////////////////////////////
+
+Equivalences in predicate logic:
+
+example sentences in English
+
+P(x): person x attends K-State
+Q(x): person x attends KU
+
+
+¬ (∃x P(x)) is equivalent to ∀x ¬ P(x)
+
+¬ (∀x P(x)) is equivalent to ∃x ¬ P(x)
+
+A x P(x) -> !Q(x) is equivalent to !(E x P(x) ^ Q(x))
+
+///////////////////////////////////////////////
+
+
+E x (E y (P(x, y)) |- E y (E x (P(x, y))
+
+///////////////////////////////////////////////
+
+
+A x (A y C(x) -> D(y)), E x C(x)  |- A y D(y)
+
+
+/////////////////////////////////////////////
+
+
+E y (A x P(x, y)) |- A x (E y P(x, y))
+
+Would we be able to prove the other direction?
+
+
+////////////////////////////////////////////
+
+Next: soundness and completeness for predicate logic
+
+entailment in predicate logic
+
+mathematical induction

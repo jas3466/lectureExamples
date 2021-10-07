@@ -1,0 +1,17 @@
+A x (A y (P(x, y))) |- A y (A x (P(y, x)))
+{
+    1. A x (A y (P(x, y)))                   premise
+    2. {
+        3. a
+        4. A y P(a, y)                       Ae 1 a
+        5. {
+            6. b
+            7. P(a, b)                      Ae 4 b
+            //want: P(b, a)
+        }
+        8. A x P(a, x)                      Ai 5
+        //want: A x P(x, a). Use Ai
+    }
+    9. A y (A x (P(y, x)))                  Ai 2
+    // want: A y (A x (P(x, y))). Use Ai
+}
