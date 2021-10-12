@@ -1,0 +1,15 @@
+E y (A x P(x, y)) |- A x (E y P(x, y))
+{
+    1. E y (A x P(x, y))            premise
+    2. {
+        3. a A x P(x, a)            assume
+        4. {
+            5. b
+            6. P(b, a)              Ae 3 b
+            7. E y P(b, y)          Ei 6 a
+        }
+        //introduce the forall
+        8. A x (E y P(x, y))        Ai 4
+    }
+    9. A x (E y P(x, y))            Ee 1 2
+}
