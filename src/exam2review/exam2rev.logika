@@ -1,0 +1,16 @@
+!(!a V b) |- a V b
+{
+    1. !(!a V b)                premise
+    2. {
+        3. !(a V b)             assume
+        4. {
+            5. a                assume
+            6. a V b            Vi1 5
+            7. _|_              !e 6 3
+        }
+        8. !a                   !i 4
+        9. !a V b               Vi1 8
+        10. _|_                 !e 9 1
+    }
+    11. a V b                   pbc 2
+}

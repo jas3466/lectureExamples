@@ -1,0 +1,169 @@
+Exam 2 is Tuesday, October 19.
+
+During lecture (9:30-10:45 am)
+
+Can bring one 8.5"x11" sheet of handwritten notes (both sides)
+
+Please sit every other chair for exam
+
+/////////////////////////////////////
+
+Topics:
+- negation rules in propositional logic
+    (!e, !i, _|_e, pbc)
+- basic definition of soundness and completeness in propositional logic
+    soundness: anything we can prove is true
+    completeness: everything that is true can be proved
+- sequent, valid, semantic entailment, theorem, satisfiability,
+    equivalence
+- translating English to predicate logic statements
+- translating predicate logic statements to English
+- proofs in predicate logic (Ai, Ae, Ei, Ee)
+- mathematical induction
+
+Multiple choice section + open-ended section
+
+p V !p is a theorem. To prove, we would do:
+
+|- p V !p
+
+(a theorem is a proof with no premises)
+
+/////////////////////////////
+
+∃x !P(x) |- !(∀x P(x))
+
+
+/////////////////////////////
+
+!(E x P(x) ^ Q(x)) |- A x (P(x) -> !Q(x))
+
+
+
+////////////////////////////
+
+
+A x P(x) -> (Q(x) V K(x)), A y P(y) -> !K(y), E x P(x) |- E x Q(x)
+
+
+
+////////////////////////////
+
+Domain: animals
+C(x): x is a cat
+S(x): x likes string
+
+Translate to English:
+
+!(A x (C(x) -> S(x)))
+
+Not all cats like string.
+
+
+A x (C(x) -> !S(x))
+
+All cats don't like string.
+
+
+E x (C(x) ^ !S(x))
+
+There is a cat that doesn't like string.
+
+
+!(E x (C(x) ^ S(x)))
+
+There is no cat who likes string.
+
+
+E x (C(x) ^ S(x))
+
+There is a cat who likes string.
+
+
+A x (S(x) -> C(x))
+
+All animals who like string are cats.
+
+
+//////////////////////////////
+
+Domain: kids
+
+B(x): x wears a blue shirt
+H(x): x wears a hat
+P(x): x likes pizza
+
+Translate to predicate logic:
+
+1) Everyone wearing a hat is also wearing a blue shirt
+
+A x (H(x) -> B(x))
+
+
+2) There is a kid wearing a hat who likes pizza.
+
+E x (H(x) ^ P(x))
+
+
+3) Everyone is either wearing a blue shirt or a hat, but not both.
+
+A x (((B(x) V H(x)) ^ !(B(x) ^ H(x))))
+
+
+//////////////////////////////
+
+Translate to English (domain: people):
+
+Sib(x, y): x is a sibling of y
+    //if x is a sibling of y, in English, then y is also a sibling of x
+O(x, y): x is older than y
+
+Mary: a person
+
+
+
+1) A x (Sib(x, Mary) -> O(x, Mary))
+
+All Mary's siblings are older than her.
+
+
+2) E x (Sib(x, Mary) ^ (A y ((x != y) -> O(x, y))))
+
+Mary has a sibling that is older than everyone.
+
+//////////////////////////////
+
+!(!a V b) |- a V b
+
+a V b, c->!a, !!c |- b
+
+!p ∧ !q ⊢ !(p ∨ q)
+
+
+/////////////////////////////
+
+!(!a V b) |= a V b
+
+How to show semantic entailment?
+
+Completing this truth table
+!(!a V b) -> (a V b)
+
+should be a tautology
+
+/////////////////////////////
+
+a V !b |- !(!a V b)
+
+give a truth assignment that shows the sequent is invalid
+
+need the premises to be true and the conclusion to be false.
+
+either !a to be true, or b to be true, or both
+    a = false
+    b = false
+
+
+//////////////////////////////
+
+How do we prove a theorem?

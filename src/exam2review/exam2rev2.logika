@@ -1,0 +1,28 @@
+A x P(x) -> (Q(x) V K(x)), A y P(y) -> !K(y), E x P(x) |- E x Q(x)
+{
+    1. A x P(x) -> (Q(x) V K(x))            premise
+    2. A y P(y) -> !K(y)                    premise
+    3. E x P(x)                             premise
+    4. {
+        5. a P(a)                           assume
+        6. P(a) -> (Q(a) V K(a))            Ae 1 a
+        7. P(a) -> !K(a)                    Ae 2 a
+        8. Q(a) V K(a)                      ->e 6 5
+        9. !K(a)                            ->e 7 5
+        10. {
+            11. Q(a)                        assume
+        }
+        12. {
+            13. K(a)                        assume
+            14. _|_                         !e 13 9
+            15. Q(a)                        _|_e 14
+        }
+        16. Q(a)                            Ve 8 10 12
+        17. E x Q(x)                        Ei 16 a
+        //want in both cases: Q(a)
+
+        //want: E x Q(x)
+    }
+    //restate E x Q(x) using Ee
+    18. E x Q(x)                            Ee 3 4
+}
