@@ -1,0 +1,20 @@
+import org.sireum.logika._
+
+val x: Z = readInt("Enter first number: ")
+val y: Z = readInt("Enter second number: ")
+
+assume(x > y)
+l"""{
+    1. x > y                    premise
+}"""
+
+val max: Z = x
+l"""{
+    1. x > y                    premise
+    2. max == x                 premise
+    3. max >= x                 algebra 2
+    4. max >= y                 algebra 1 2
+    5. max >= x ^ max >= y      ^i 3 4
+}"""
+
+assert(max >= x & max >= y)

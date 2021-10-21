@@ -1,0 +1,14 @@
+import org.sireum.logika._
+
+val x: Z = readInt("Enter a positive number: ")
+
+//what do we want to assume?
+assume(x > 0)
+
+l"""{
+    1. x > 0                    premise
+    2. x > -1                   algebra 1
+}"""
+
+//what do we want to assert?
+assert(x > -1)
