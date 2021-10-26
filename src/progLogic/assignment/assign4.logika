@@ -1,0 +1,15 @@
+import org.sireum.logika._
+
+var x: Z = readInt()
+var y: Z = readInt()
+
+val xOrig: Z = x
+val yOrig: Z = y
+
+x = x + y
+y = x - y
+x = x - y
+
+//WILL DO ON THURSDAY
+
+//what do we want to claim we did?

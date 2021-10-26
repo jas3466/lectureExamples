@@ -1,0 +1,34 @@
+import org.sireum.logika._
+
+var num: Z = readInt()
+val orig: Z = num   //orig never changes
+val diff: Z = 2
+
+//what do we know now?
+//Add a logic block
+
+num = num + diff
+l"""{
+    1. diff == 2                premise
+    2. orig == num_old          premise
+    3. num == num_old + diff    premise
+    4. num == orig + diff       algebra 2 3
+}"""
+
+//what do we know now?
+//Add an assert statement
+//add a logic block
+
+
+num = num - diff
+l"""{
+    1. num == num_old - diff        premise
+    2. num_old == orig + diff           premise
+    3. num == orig                  algebra 1 2
+}"""
+
+//what do we know now?
+//Add an assert statement
+//add a logic block
+
+assert(num == orig)

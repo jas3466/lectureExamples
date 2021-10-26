@@ -1,0 +1,66 @@
+import org.sireum.logika._
+
+//get positive user input number
+var num: Z = readInt()
+
+assume(num > 0)
+
+//save out original value
+
+val orig: Z = num
+
+l"""{
+    1. num > 0                  premise
+    2. orig == num              premise
+}"""
+
+//multiply input number by 2
+
+num = num * 2
+
+l"""{
+    1. num_old > 0              premise
+    2. orig == num_old          premise
+    3. num == num_old * 2       premise
+    4. num >= 0                 algebra 1 3
+    5. 2 > 0                    algebra
+    6. num % 2 == 0             algebra 3
+    7. num == orig*2            algebra 2 3
+}"""
+
+    //what do we know about the number now?
+
+assert(num % 2 == 0)
+
+//add 2 to the input number
+
+num = num + 2
+
+l"""{
+    1. num == num_old + 2           premise
+    2. num_old % 2 == 0             premise
+    3. num_old == orig*2            premise
+    4. num_old >= 0                 premise
+    5. num >= 0                     algebra 1 4
+    6. num % 2 == 0                 algebra 1 2
+    7. num == orig*2 + 2            subst1 3 1
+    8. 2 != 0                       algebra //needed for dividing by 2 on line 56
+}"""
+
+    //what is still true about the input number?
+
+assert(num % 2 == 0)
+
+//divide the input number by 2 and subtract 1
+
+num = num/2 - 1
+
+l"""{
+    1. num_old == orig*2 + 2        premise
+    2. num == num_old/2 - 1         premise
+    3. num == orig                  algebra 1 2
+}"""
+
+    //what is the result?
+
+assert(num == orig)
