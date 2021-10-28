@@ -1,0 +1,50 @@
+import org.sireum.logika._
+
+var x: Z = readInt()
+var y: Z = readInt()
+
+var max: Z = 0
+
+//how would we update max to be the biggest of x and y?
+
+if (x > y) {
+    max = x
+    l"""{
+        1. max == x             premise
+        2. x > y                premise
+        3. max >= x             algebra 1
+        4. max >= y             algebra 1 2
+    }"""
+
+} else {
+    max = y
+    l"""{
+        1. !(x > y)             premise //the if condition was not true
+        2. max == y             premise
+        3. max >= y             algebra 2
+        4. x <= y               algebra 1
+        5. max >= x             algebra 2 4
+    }"""
+}
+
+l"""{
+    1. max >= x                 premise //true in both branches
+    2. max >= y                 premise //true in both branches
+    3. max == x V max == y      premise //LHS from if, RHS from else
+    4. max >= x ^ max >= y      ^i 1 2
+    5. max >= x ^ max >= y ^ (max == x V max == y)  ^i 4 3
+}"""
+
+println("Biggest number is: ", max)
+
+
+//what do we want to be able to assert to know our program worked?
+
+assert(max >= x & max >= y & (max == x | max == y))
+
+//max >= x -> want this conclusion at end of both branches
+//max >= y -> want this conclusion at end of both branches
+
+//if branch: max == x
+//else branch: max == y
+//afterwards, can claim max == x V max == y

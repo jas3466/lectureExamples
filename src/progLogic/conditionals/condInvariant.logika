@@ -1,0 +1,79 @@
+import org.sireum.logika._
+
+var total: Z = 0
+var pos: Z = 0
+var nonPos: Z = 0
+
+// Prove the invariant
+//      total == pos + nonPos
+// holds BEFORE the conditional statement
+
+l"""{
+    1. total == 0               premise
+    2. pos == 0                 premise
+    3. nonPos == 0              premise
+    4. total == pos + nonPos    algebra 1 2 3
+}"""
+
+assert (total == pos + nonPos)
+
+val x: Z = readInt()
+
+if (x > 0) {
+    l"""{
+        1. x > 0            premise //condition is true
+        2. total == 0               premise
+        3. pos == 0                 premise
+        4. nonPos == 0              premise
+        5. total == pos + nonPos    premise
+    }"""
+
+    pos = pos + 1
+    l"""{
+        1. pos == pos_old + 1           premise
+        2. total == 0                   premise
+        3. nonPos == 0                  premise
+        4. pos_old == 0                 premise
+        5. total == pos_old + nonPos    premise
+        6. pos == 1                     algebra 1 4
+        7. total == nonPos              algebra 4 5
+    }"""
+
+    total = total + 1
+    l"""{
+        1. total == total_old + 1       premise
+        2. pos == 1                     premise
+        3. total_old == nonPos          premise
+        4. nonPos == 0                  premise
+        5. total_old == 0               premise
+        6. total == 1                   algebra 1 5
+        7. total == pos + nonPos        algebra 2 4 6
+    }"""
+
+} else {
+    nonPos = nonPos + 1
+    l"""{
+        1. !(x > 0)                     premise //!(condition), but not needed
+        2. nonPos_old == 0              premise
+        3. nonPos == nonPos_old + 1     premise
+        4. nonPos == 1                  algebra 2 3
+    }"""
+
+    total = total + 1
+    l"""{
+        1. nonPos == 1                  premise
+        2. pos == 0                     premise
+        3. total_old == 0               premise
+        4. total == total_old + 1       premise
+        5. total == 1                   algebra 3 4
+        6. total == pos + nonPos        algebra 1 2 5
+    }"""
+}
+
+l"""{
+    1. total == pos + nonPos            premise // true in both if and else
+}"""
+
+//prove invariant property: total == pos + nonPos
+//is still true AFTER the conditional
+assert (total == pos + nonPos)
