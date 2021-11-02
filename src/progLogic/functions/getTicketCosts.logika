@@ -1,0 +1,6 @@
+import org.sireum.logika._
+
+def getTicketCosts(adult: Z, kid: Z): Z = {
+    //adult tickets: $50
+    //kid tickets: $30
+}

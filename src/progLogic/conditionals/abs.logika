@@ -1,0 +1,47 @@
+import org.sireum.logika._
+
+val num: Z = readInt()
+
+//want to update absNum to be the absolute value of num
+var absNum: Z = num
+
+if (num < 0) {
+    //this will "undo" the negative
+    absNum = num * -1
+
+    l"""{
+        1. num < 0              premise
+        2. absNum == num * -1   premise
+        3. absNum >= 0          algebra 1 2
+        4. absNum == -1*num     algebra 2
+    }"""
+
+} else {
+    //do nothing
+
+    l"""{
+        1. !(num < 0)           premise
+        2. absNum == num        premise
+        3. num >= 0             algebra 1
+        4. absNum >= 0          subst2 2 3
+    }"""
+}
+
+l"""{
+    1. absNum >= 0                      premise
+    2. absNum == -1*num V absNum == num premise
+    3. {
+        4. absNum == -1*num                 assume
+        5. absNum == num V absNum == -1*num Vi2 4
+    }
+    6. {
+        7. absNum == num                    assume
+        8. absNum == num V absNum == -1*num Vi1 7
+    }
+    9. absNum == num V absNum == -1*num     Ve 2 3 6
+    10. absNum >= 0 ^ (absNum == num V absNum == -1*num)    ^i 1 9
+}"""
+
+
+//what do we want to claim?
+assert(absNum >= 0 & (absNum == num | absNum == -1*num))

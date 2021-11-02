@@ -1,0 +1,36 @@
+import org.sireum.logika._
+
+def plusOne(n: Z): Z = {
+    l"""{
+        //no requires -- will work for any parameter
+        //no modifies (no global variables or sequences)
+        ensures result == n+1
+    }"""
+
+    val answer: Z = n+1
+
+    //at end, need:
+    l"""{
+        //the line below shows that the postcondition is true
+        1. answer == n+1            premise
+    }"""
+
+    return answer
+}
+
+////////// Test code ///////////////
+
+var x: Z = 5
+
+//function has no requires, so don't need to show anything first
+
+var added: Z = plusOne(x)
+
+l"""{
+    //this comes from the postcondition
+    1. added == x+1                 premise
+    2. x == 5                       premise
+    3. added == 6                   algebra 1 2
+}"""
+
+assert(added == 6)

@@ -1,0 +1,85 @@
+HW 10 due Thursday, November 4
+
+Look at starter files
+
+/////////////////////////////////
+
+How to assert something of the form p->q
+
+p V !q
+
+
+//////////////////////////////////
+
+Absolute value
+
+/////////////////////////////////
+
+Max of 3
+
+- look at code file first
+- then look at verification file
+
+////////////////////////////////
+
+Next up: validating programs with functions
+
+- look at "plus one" code
+
+////////////////////////////////
+
+Function contracts - just under function definition:
+
+l"""{
+    requires (precondition)
+    modifies (list of variables)
+    ensures (postcondition)
+}"""
+
+
+Requires/precondition:
+- any assumptions we need to make about the parameters
+- user must prove these requirements BEFORE calling the function
+- list preconditions as PREMISES in first logic block in function
+- can have several preconditions -- put on the next lines, tabbed over
+
+
+Modifies:
+- list of any sequences or global variables modified by this function
+- we won't be using until we get to sequences
+
+
+Ensures/postcondition:
+- describes what the function returns
+    result == (describe the value being returned)
+
+- user can use a postcondition as a PREMISE in a logic block
+    after calling the function
+- describes any changes the function makes to sequences/globals
+- can have several postconditions -- put on the next lines, tabbed over
+
+
+/////////////////////////////////
+
+Write function contract for plusOne
+
+Prove the postcondition for plusOne
+
+Validate the assert after calling plusOne
+
+/////////////////////////////////
+
+Example: getTicketCosts
+(we'll do on Thursday)
+
+- find the total cost of tickets based on adult/child numbers
+- each adult ticket is $50, and each child ticket is $30
+
+- what do we need as preconditions?
+- what should be the postcondition?
+
+--> write the code
+--> prove the postcondition
+--> write test code to call getTicketCosts
+--> add an assert
+--> validate the assert
