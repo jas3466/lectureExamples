@@ -1,0 +1,92 @@
+import org.sireum.logika._
+
+//computes m * n using repeated addition
+//m + m + ... + m a total of n times
+def mult(m: Z, n: Z): Z = {
+    l"""{
+        requires n >= 0
+        ensures result == m*n
+    }"""
+
+    var sum: Z = 0
+    var count: Z = 0
+
+    //prove the invariant is true before the loop begins
+    l"""{
+        1. sum == 0             premise
+        2. count == 0           premise
+        3. sum == m*count       algebra 1 2
+        //want: sum == m*count
+    }"""
+
+    while (count != n) {
+        l"""{
+            invariant sum == m*count
+            modifies sum, count
+        }"""
+
+        //can assume invariant is true at the beginning of the iteration
+        l"""{
+            //I know the loop invariant is true
+            1. sum == m*count               premise
+            //I know the loop condition is true
+            2. count != n                   premise
+            //I know the precondition is true (n hasn't changed)
+            3. n >= 0                       premise
+        }"""
+
+        sum = sum + m
+        l"""{
+            1. sum == sum_old + m           premise
+            2. sum_old == m*count           premise
+            3. sum == (m*count) + m         subst1 2 1
+        }"""
+        count = count + 1
+        l"""{
+            1. count == count_old + 1       premise
+            2. sum == (m*count_old) + m     premise
+            3. sum == (m*(count-1)) + m     algebra 1 2
+
+            //we showed the loop invariant still holds!
+            4. sum == m*count               algebra 3
+        }"""
+        //by here, I need to show
+            //sum == m*count
+            //for the new values of sum and count
+    }
+
+    //we still need to show the postcondition is true
+    //I need: sum == m*n
+
+    l"""{
+        //I know the loop condition is false
+        1. !(count != n)            premise
+        //I know the loop invariant is true
+        2. sum == m*count           premise
+        3. count == n               algebra 1
+        4. sum == m*n               subst1 3 2
+    }"""
+
+    return sum
+}
+
+//////// Test code //////////////
+
+var x: Z = 4
+var y: Z = 9
+
+//show the 2nd parameter is >= 0 to satisfy the precondition
+l"""{
+    1. y == 9               premise
+    //below, we show the precondition is true
+    2. y >= 0               algebra 1
+}"""
+var answer: Z = mult(x, y)
+l"""{
+    1. x == 4               premise
+    2. y == 9               premise
+    //I know the postcondition is true
+    3. answer == x*y        premise
+    4. answer == 36         algebra 1 2 3
+}"""
+assert(answer == 36)

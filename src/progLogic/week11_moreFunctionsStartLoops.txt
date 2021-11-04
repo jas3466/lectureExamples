@@ -1,0 +1,167 @@
+HW 10 due tonight
+
+HW 11 will be posted later today (due Thursday, November 11)
+
+//////////////////////////////
+
+Reminder: function contracts
+
+l"""{
+    requires (precondition)
+    modifies (list of variables)
+    ensures (postcondition)
+}"""
+
+preconditions - things I need to be true (usually about parameters)
+    for the function to work
+
+postconditions - what I am promising will be true when the function
+    ends. Describes what is being returned.
+
+    result == (some expression involving parameters)
+
+Four steps:
+1) What should be done before calling the function?
+    you must have a logic block that verifies the precondition
+
+
+2) What can the function itself do with the precondition?
+    can list all preconditions as a premise in a logic block
+
+
+3) What must the function do with the postcondition?
+    need to verify the postcondition in a logic block
+    before function ends
+
+    l"""{
+        answer == (same expression as postcondition)
+    }"""
+    return answer
+
+
+4) What can the calling code do with the postcondition after
+    the function returns?
+
+x = abs(some number)
+
+l"""{
+    //or whatever was promised in the postcondition
+    1. x >= 0               premise
+}"""
+
+/////////////////////////////////
+
+Example: getTicketCosts
+
+- find the total cost of tickets based on adult/child numbers
+- each adult ticket is $50, and each child ticket is $30
+
+- what do we need as preconditions?
+- what should be the postcondition?
+
+--> write the code
+--> prove the postcondition
+--> write test code to call getTicketCosts
+--> add an assert
+--> validate the assert
+
+
+/////////////////////////////////
+
+Validating loops.
+
+while (condition) {
+    statements
+}
+
+We want to be able to make claims about our program after loop
+is done
+    ...but we don't know how many times it will execute
+    ...or even IF it will execute
+
+//////////////////////////////
+
+Solution: kind of like mathematical induction
+
+Come up with a loop INVARIANT that summarizes the behavior
+in a loop
+
+invariant should be true when loop begins
+should be STILL true at the end of each iteration
+
+1) Prove the invariant is true before the loop begins
+    (what is this like in mathematical induction?)
+    this is like the base case!
+
+2) Assume the invariant is true at the beginning of an iteration.
+    Prove the invariant still holds at the end of the iteration.
+    (what is this like in mathematical induction?)
+    this is like the inductive step!
+
+
+/////////////////////////
+
+When loop ends, you know two things:
+    1) About the invariant? still true
+
+    2) About the loop condition? loop condition is false
+
+
+If your loop is in a function, you can use those two pieces
+to prove the postcondition of the function.
+
+/////////////////////////
+
+Loop invariant block: just inside the loop
+
+while (condition) {
+    l"""{
+        invariant (list the invariant[s])
+        modifies (list all variables modified in the loop)
+    }"""
+
+    code for the loop
+}
+
+
+/////////////////////////
+
+Example: multiplication by repeated addition
+
+See the code.
+
+
+Verification steps:
+1) Add a function contract
+2) Add a loop invariant block
+3) Prove the invariant is true before the loop begins
+4) Assume the invariant is true at the start of an iteration.
+    Prove it is still true at the end of the iteration.
+5) Prove the postcondition after the loop ends.
+    !(condition) and the invariant are premises
+
+
+If you have calling code:
+1) Prove the precondition in the calling code before
+    calling the function.
+2) Use the postcondition as a premise in the calling code after
+    calling the function.
+
+
+////////////////////////////////
+
+Prove the correctness of mult.
+
+///////////////////////////////
+
+What is upcoming.
+
+Next week: more with loops, how to write invariants
+    recursive functions
+
+Before fall break (Tuesday): exam 3
+
+Thursday before fall break: look at symexe mode in Logika
+
+After fall break: sequences, global variables, multiple functions
+
