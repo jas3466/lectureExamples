@@ -1,0 +1,23 @@
+import org.sireum.logika._
+
+def mult(m: Z, n: Z): Z = {
+
+    var answer: Z = 0
+
+    if (n > 0) {
+        answer = mult(m, n-1)
+        answer = answer + m
+    } else {
+        //do nothing
+    }
+
+    return answer
+}
+
+///////// Test code ////////////
+
+var x: Z = 5
+var y: Z = 2
+
+var test: Z = mult(x, y)
+assert(test == 10)

@@ -1,0 +1,102 @@
+import org.sireum.logika._
+
+l"""{
+    fact
+        def factDef(n: Z): Z
+            fZero. factDef(0) == 1
+            fPos.  ∀x: Z  x > 0 → factDef(x) == factDef(x - 1) * x
+}"""
+
+def factorial(n: Z): Z = {
+    l"""{
+        requires n >= 0
+        //this is saying I promise to return n!
+        ensures result == factDef(n)
+    }"""
+
+    var answer: Z = 1
+    var cur: Z = 0
+
+    //show invariant is true before loop begins
+    l"""{
+        1. answer == 1              premise
+        2. cur == 0                 premise
+        3. factDef(0) == 1          fact fZero
+        4. answer == factDef(cur)   algebra 1 2 3
+        5. cur >= 0                 algebra 2
+    }"""
+
+    while (cur != n) {
+        l"""{
+            //answer is cur!
+            invariant answer == factDef(cur)
+                cur >= 0
+            modifies cur, answer
+        }"""
+        cur = cur + 1
+        l"""{
+            1. cur == cur_old + 1           premise
+            2. answer == factDef(cur_old)   premise
+            3. answer == factDef(cur-1)     algebra 1 2
+            5. cur_old >= 0                 premise
+            6. cur > 0                      algebra 5 1
+        }"""
+        answer = answer * cur
+        l"""{
+            1. answer = answer_old * cur                        premise
+            2. answer_old == factDef(cur-1)                     premise
+            3. answer = factDef(cur-1) * cur                    algebra 1 2
+            4. ∀x: Z  x > 0 → factDef(x) == factDef(x - 1) * x  fact fPos
+            5. cur > 0 → factDef(cur) == factDef(cur - 1) * cur Ae 4 cur
+            6. cur > 0                                          premise
+            7. factDef(cur) == factDef(cur - 1) * cur           ->e 5 6
+            8. answer == factDef(cur)                           algebra 3 7
+            9. cur >= 0                                         algebra 6
+            //want to get to: answer == factDef(cur)
+        }"""
+    }
+
+    l"""{
+        //invariant still holds
+        1. answer == factDef(cur)               premise
+        2. !(cur != n)                          premise //condition is false
+        3. cur == n                             algebra 2
+        4. answer == factDef(n)                 algebra 1 3
+        //need: answer == factDef(n)
+    }"""
+
+    return answer
+}
+
+//////// Test code ///////////
+
+var y: Z = 3
+l"""{
+    1. y == 3               premise
+    2. y >= 0               algebra 1
+}"""
+var yFact: Z = factorial(y)
+l"""{
+    1. yFact == factDef(y)  premise
+    2. y == 3               premise
+    3. yFact == factDef(3)  algebra 1 2
+    4. ∀x: Z  x > 0 → factDef(x) == factDef(x - 1) * x  fact fPos
+    5. 3 > 0 → factDef(3) == factDef(3 - 1) * 3         Ae 4 3
+    6. 3 > 0                                            algebra
+    7. factDef(3) == factDef(3 - 1) * 3                 ->e 5 6
+    8. factDef(3) == factDef(2) * 3                     algebra 7
+    9. 2 > 0 → factDef(2) == factDef(2 - 1) * 2         Ae 4 2
+    10. 2 > 0                                           algebra
+    11. factDef(2) == factDef(2 - 1) * 2                ->e 9 10
+    12. factDef(2) == factDef(1) * 2                    algebra 11
+    13. 1 > 0 → factDef(1) == factDef(1 - 1) * 1        Ae 4 1
+    14. 1 > 0                                           algebra
+    15. factDef(1) == factDef(1 - 1) * 1                ->e 13 14
+    16. factDef(1) == factDef(0) * 1                    algebra 15
+    17. factDef(0) == 1                                 fact fZero
+    18. yFact == 3*2*1*1                                algebra 3 8 12 16 17
+    19. yFact == 6                                      algebra 18
+    //need: yFact == 6
+}"""
+
+assert(yFact == 6)

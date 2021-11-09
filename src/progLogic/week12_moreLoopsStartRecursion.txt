@@ -1,0 +1,106 @@
+HW 11 due Thursday, November 11
+
+Exam 3 is Tuesday, November 16
+    -> we will review on Thursday
+
+///////////////////////////////////
+
+Reminder: loop invariant block
+
+//prove invariant holds before loop begins
+while (condition) {
+    l"""{
+        invariant (list the invariant[s])
+        modifies (list all variables modified in the loop)
+    }"""
+
+    code for the loop
+    //prove invariant still true
+}
+
+Where do we need to prove the invariant(s)?
+
+1) Before we enter the while loop
+2) Assume the invariant is true when an iteration begins.
+    Prove it is true at the end of the iteration.
+
+Where can we assume as a premise that the invariant is true?
+
+1) at the beginning of an iteration
+2) after the loop is over
+
+///////////////////////////////////
+
+Example: sum of odd numbers
+
+See code.
+
+What do we want as our function contract?
+
+
+
+
+What do we want as our invariant?
+
+
+
+
+//////////////////////////////////
+
+Example: factorial program
+
+See code.
+
+What would the invariant be (in words)?
+
+
+
+
+At the end of i iterations, what is answer?
+
+
+
+What would the postcondition be (in words)?
+
+
+How can we express this?
+
+
+
+
+
+///////////////////////////////////
+
+Answer: Logika programming *facts*
+
+- let you create proof functions for specifying contracts
+- similar to how you would write a recursive definition in math
+
+    0! = 1
+    n! = (n-1)! * n
+
+l"""{
+    fact
+        def factDef(n: Z): Z
+            fZero. factDef(0) == 1
+            fPos.  ∀x: Z  x > 0 → factDef(x) == factDef(x - 1) * x
+}"""
+
+- once this is defined (before the code for the function), we
+    can refer to rules fZero and fPos as justifications in our
+    logic blocks.
+
+
+--> now, write the function contract and loop invariant block
+
+--> do the verification
+
+
+///////////////////////////////
+
+Recursive functions. (we will do on Thursday)
+
+See mult using recursion.
+
+How would we verify it?
+
