@@ -1,16 +1,48 @@
 import org.sireum.logika._
 
+//return m*n
 def mult(m: Z, n: Z): Z = {
+    l"""{
+        requires n >= 0
+        ensures result == m*n
+    }"""
 
     var answer: Z = 0
 
     if (n > 0) {
+        l"""{
+            1. n > 0                premise //from the if
+            2. (n-1) >= 0           algebra 1
+        }"""
         answer = mult(m, n-1)
+        l"""{
+            1. n > 0                premise
+            2. answer == m*(n-1)    premise // from the postcondition
+        }"""
         answer = answer + m
+        l"""{
+            1. answer == answer_old + m premise
+            2. answer_old == m*(n-1)    premise //from prior block
+            3. answer == m*(n-1) + m    algebra 1 2
+            4. answer == m*n            algebra 3
+        }"""
     } else {
         //do nothing
+
+        l"""{
+            1. answer == 0              premise
+            2. !(n > 0)                 premise
+            3. n >= 0                   premise
+            4. n == 0                   algebra 2 3
+            5. answer == m*n            algebra 1 4
+        }"""
     }
 
+    l"""{
+        1. answer == m*n                premise //was true in both blocks
+    }"""
+
+    //want: answer == m*n to show the postcondition
     return answer
 }
 
@@ -19,5 +51,16 @@ def mult(m: Z, n: Z): Z = {
 var x: Z = 5
 var y: Z = 2
 
+l"""{
+    1. y == 2           premise
+    2. y >= 0           algebra 1
+}"""
+
 var test: Z = mult(x, y)
+l"""{
+    1. x == 5           premise
+    2. y == 2           premise
+    3. test == x*y      premise
+    4. test == 10       algebra 1 2 3
+}"""
 assert(test == 10)

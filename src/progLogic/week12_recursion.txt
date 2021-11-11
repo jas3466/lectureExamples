@@ -1,0 +1,22 @@
+HW 11 due tonight
+
+HW 12 will be posted after class, due Thursday, November 18
+    - will have problems with Logika facts
+    - will have problems with recursion
+    - try to work it before the exam, if possible!
+
+Exam 3 is Tuesday, November 16
+    -> we will review today
+
+///////////////////////////////
+
+--> quickly, look at finished factorial verification
+
+
+/////////////////////////////
+
+Recursive functions.
+
+See mult using recursion.
+
+How would we verify it?

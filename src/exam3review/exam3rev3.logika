@@ -1,0 +1,77 @@
+import org.sireum.logika._
+
+def nthEven(n: Z): Z = {
+    l"""{
+        requires n >= 0
+        ensures result == 2*n
+    }"""
+
+    var count: Z = 0
+    var even: Z = 0
+
+    l"""{
+        premises:
+        count == 0
+        even == 0
+        n >= 0
+
+        goal:
+        prove the invariant is true before the loop begins
+    }"""
+
+    while (count != n) {
+        l"""{
+            invariant
+                even == 2*count
+            modifies count, even
+        }"""
+
+        even = even + 2
+        l"""{
+            premises:
+            count != n
+            even_old == 2*count
+            even == even_old + 2
+
+            goal:
+            update the invariant statement to not have any _olds
+            (even == 2*count + 2, no olds)
+        }"""
+
+        count = count + 1
+        l"""{
+            premise:
+            count_old != n
+            count == count_old + 1
+            even == 2*count_old + 2 (the prior version of the invariant)
+
+            goal:
+            get to exactly the invariant
+            even == 2*count
+        }"""
+    }
+
+    l"""{
+        premise:
+        even == 2*count (invariant)
+        !(count != n)
+
+        goal:
+        even == 2*n (prove the postcondition)
+    }"""
+
+    return even
+}
+
+//////// Test code //////////////
+
+var num: Z = 3
+
+//goal: prove the precondition
+//num >= 0
+var thirdEven: Z = nthEven(num)
+
+//premise: thirdEven == 2*num
+//goal: get to thirdEven == 6
+
+assert(thirdEven == 6)

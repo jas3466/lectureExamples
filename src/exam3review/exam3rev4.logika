@@ -1,0 +1,55 @@
+import org.sireum.logika._
+
+val origTemp: Z = readInt("Enter the temperature")
+
+var acOn: B = false
+var finalTemp: Z = 0
+
+if (origTemp >= 75) {
+    acOn = true
+
+
+    l"""{
+        //what can I list as a premise here?
+        origTemp >= 75
+        acOn == true
+        finalTemp == 0
+    }"""
+
+    finalTemp = 75
+    l"""{
+        //what can I list as a premise here?
+        finalTemp == 75
+        origTemp >= 75
+        acOn == true
+    }"""
+
+} else {
+    acOn = false
+
+    l"""{
+        //what can I list as a premise?
+        !(origTemp >= 75)
+        acOn == false
+        finalTemp == 0
+
+        goal:
+        finalTemp <= 75
+    }"""
+
+    finalTemp = origTemp
+
+    l"""{
+        //what can I list as a premise?
+        !(origTemp >= 75)
+        acOn == false
+        finalTemp == origTemp
+
+        goal:
+        finalTemp <= 75
+        origTemp < 75
+    }"""
+}
+
+assert(finalTemp <= 75)
+assert(acOn | origTemp < 75)

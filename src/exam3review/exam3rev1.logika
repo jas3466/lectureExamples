@@ -1,0 +1,23 @@
+
+import org.sireum.logika._
+
+val a: Z = 17
+val b: Z = a - 5
+val c: Z = (a - 5) * a
+
+l"""{
+    1. a == 17                          premise
+    2. b == a - 5                       premise
+    3. c == (a - 5) * a                 premise
+    4. c == (b) * a                     subst2 2 3
+    5. c == (b) * 17                    subst1 1 4
+    6. b == 17 - 5                      subst1 1 2
+    7. b == 12                          algebra 6
+    8. c == (12) * 17                   subst1 7 5
+    9. c == 204                         algebra 8
+    10. c >= 200                        algebra 9
+    //finish the block
+    11. a == 17 ^ c >= 200              ^i 1 10
+}"""
+
+assert(a == 17 & c >= 200)
