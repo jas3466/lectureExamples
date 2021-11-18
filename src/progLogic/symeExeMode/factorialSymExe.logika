@@ -1,0 +1,44 @@
+import org.sireum.logika._
+
+l"""{
+    fact
+        def factDef(n: Z): Z
+            fZero. factDef(0) == 1
+            fPos.  ∀x: Z  x > 0 → factDef(x) == factDef(x - 1) * x
+}"""
+
+def factorial(n: Z): Z = {
+    l"""{
+        requires n >= 0
+        //this is saying I promise to return n!
+        ensures result == factDef(n)
+    }"""
+
+    var answer: Z = 1
+    var cur: Z = 0
+
+
+    while (cur != n) {
+        l"""{
+            //answer is cur!
+            invariant answer == factDef(cur)
+                cur >= 0
+            modifies cur, answer
+        }"""
+        cur = cur + 1
+
+        answer = answer * cur
+
+    }
+
+    return answer
+}
+
+//////// Test code ///////////
+
+var y: Z = 3
+
+var yFact: Z = factorial(y)
+
+
+assert(yFact == 6)
