@@ -21,6 +21,12 @@ SymExe mode - only needs function contracts and invariant blocks.
 
 **See how to switch modes
 
+For SymExe:
+
+File->Settings->Tools->Sireum->Logika
+    Auto is checked
+    Checker kind is "summarizing symexe"
+
 ////////////////////////////
 
 Example: See what we can change in factorial verification.
