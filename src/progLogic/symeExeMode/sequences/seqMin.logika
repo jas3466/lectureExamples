@@ -1,0 +1,18 @@
+import org.sireum.logika._
+
+def min(list: ZS): Z = {
+    l"""{
+        //function contract
+    }"""
+
+    //how should we write the code?
+
+    //don't forget the loop invariant block
+}
+
+////////////// Calling code ///////////////////
+
+var test: ZS = ZS(8,1,0,10,9,2,0)
+var testMin: Z = min(test)
+
+//what should testMin be?

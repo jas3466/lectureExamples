@@ -1,0 +1,75 @@
+Exam 3.
+
+Average: 75% (not including students who didn't take exam)
+
+High: 78 (I think...)
+
+A (72-80): 17 students
+B (64-71): 24 students
+C (56-63): 16 students
+D (48-55): 9 students
+F (47 and under): 17 students (plus 6 students who did not take exam)
+
+Work through exam.
+
+How to improve?
+- Come to class!
+- Make sure you understand the solution / what you missed
+- Rework exam problems on your own (without looking at the solution)
+- Do the same for previous exams as well
+- If there was a particular area you didn't understand,
+    review the notes from those days. Rework any examples on your own.
+
+/////////////////////////////////
+
+HW 13 due Thursday, December 2
+
+There will be one more HW assignment after that
+
+Final exam: Wednesday, December 15 2:00-3:50 pm in this room
+    - will be cumulative
+        - 25% from exam 1 material
+        - 25% from exam 2 material
+        - 25% from exam 3 material
+        - 25% from material since exam 3
+    - in a different Canvas category from midterm exams
+
+////////////////////////////////
+
+Review: write a swap function for a sequence
+
+
+l"""{
+    requires
+    modifies
+    ensures
+}"""
+
+How to reference the original (parameter) version of sequence?
+
+What should we always state about the sequence size?
+
+How to specify a range of indices?
+    A x: (start..<end) (say something about seq(x), seq_in(x))
+
+Can also do:
+    A x: (start..<end) (something about x) ->
+                        (something about seq(x), seq_in(x))
+
+///////////////////////////////
+
+Review: verify a function that adds 1 to all elements in a sequence
+
+
+//////////////////////////////
+
+Harder example: verify a function that returns the sum of elements
+    in a sequence
+
+/////////////////////////////
+
+Look at HW 13 problems
+
+/////////////////////////////
+
+Write a function that returns the min element of a sequence
