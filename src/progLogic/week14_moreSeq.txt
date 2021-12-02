@@ -68,8 +68,6 @@ Harder example: verify a function that returns the sum of elements
 
 /////////////////////////////
 
-Look at HW 13 problems
-
-/////////////////////////////
 
 Write a function that returns the min element of a sequence
+    - do Thursday

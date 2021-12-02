@@ -1,0 +1,122 @@
+HW 13 due tonight
+
+On #2 (the Fibonacci problem):
+    you can require that the parameter be >= 1
+    (or >= 2 if you would like)
+
+Otherwise, you may have difficulty getting the
+loop invariant to be satisfied before the loop begins.
+
+(If you solved the problem a different way,
+requiring that the parameter be >= 0, that's fine too.)
+
+//////////////////////////////////////
+
+HW 14 (last one) will be posted after class today
+
+Final exam: Wednesday, December 15 2:00-3:50 pm in this room
+
+///////////////////////////////////////
+
+Function contract when a sequence is a parameter:
+    - what to require, in general?
+        sometimes need to require something about the sequence size
+        if you have an index as a parameter, require that it be valid
+
+    - "modifies"? - if you are changing a sequence parameter
+
+    - postcondition?
+        if the sequence is modified, say that the size doesn't change
+        state which elements WILL change and which WON'T change
+            (likely use a A statement)
+        if you are returning something, need result == (something)
+
+
+Loop invariant when working with a sequence:
+    - invariant:
+        - loop counter?
+            bound the loop counter (how small and how big it can get)
+
+        - sequence?
+            if sequence changes, say the size doesn't change
+            say what elements HAVE already changed
+            say what elements have NOT already changed
+
+    - modifies?
+        - any variables (including sequence, if needed) that are
+            modified in the loop
+
+
+///////////////////////////////////////
+
+Write a function that returns the min element of a sequence
+
+///////////////////////////////////////
+
+Selection sort
+
+
+
+/////////////////////////////////////
+
+Programs with multiple functions, in practice:
+
+- If you are calling a function someone else wrote
+    - You probably can't see that code
+    - You want that function's specification (pre/post conditions)
+        to be as specific as possible
+
+- If you are writing a function
+    - Supply a GOOD specification
+    - Often best to write the specification before the code
+
+
+It is good to do this in the documentation even when your
+programs aren't formally verified.
+
+////////////////////////////////////
+
+Global variables and global invariants. - we will start on Tuesday
+
+- Multiple functions might share the same global variables
+- (true for fields/properties when writing general classes)
+
+- Will add GLOBAL INVARIANTS specifying what must always be true
+    about global variables
+
+
+- If a function works with global variables:
+    - It can list the global invariants as PREMISES
+        at the beginning of the function
+    - It must PROVE the global invariants still hold
+        at the end of the function
+
+
+- After returning from a function call,
+    we can list the global invariants as PREMISES
+
+/////////////////////////////////////
+
+Bank example.
+
+Global variables:
+    - account balance
+    - "elite" status (a boolean for whether the balance is >= 1 million)
+
+Global invariants:
+    - balance should be non-negative
+    - elite status should match balance
+
+////////////////////////////////////
+
+Hall passes example
+
+///////////////////////////////////
+
+Next Tuesday:
+- discuss termination (if time)
+- look at specifications and assertions in practice
+    (we'll look at Java)
+
+Next Thursday:
+- review for the final

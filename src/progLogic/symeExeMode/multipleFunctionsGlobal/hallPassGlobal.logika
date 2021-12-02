@@ -1,0 +1,66 @@
+//SYMEXE MODE
+
+import org.sireum.logika._
+
+l"""{
+    //pos starts at the sequence size
+    //every time, subtract one
+    fact
+        def sumPasses(list: BS, pos: Z): Z
+            = 0, if pos == 0        (sum0)
+            = 1 + sumPasses(list, pos-1),
+                if pos >= 1 ^ list(pos-1)   (sumTrue)
+            = sumPasses(list, pos-1),
+                if pos >= 1 ^ !list(pos-1)   (sumFalse)
+}"""
+
+//list: (true,false,true)
+//sumPasses(list, 3) -> (??? What?)
+
+val totalPasses: Z = 3
+var passesAvailable: Z = totalPasses
+
+//5 students in the class
+var passesOut: BS = BS(false,false,false,false,false)
+
+
+
+l"""{
+    invariant
+        //LIST THE GLOBAL INVARIANTS
+}"""
+
+def takeHallPass(studentPos: Z): Unit = {
+    l"""{
+        //WRITE THE FUNCTION CONTRACT
+    }"""
+    passesOut(studentPos) = true
+    passesAvailable = passesAvailable - 1
+}
+
+def returnHallPass(studentPos: Z): Unit = {
+    l"""{
+        //WRITE THE FUNCTION CONTRACT
+    }"""
+    passesOut(studentPos) = false
+    passesAvailable = passesAvailable + 1
+}
+
+
+/////// Test code //////////
+assert(passesAvailable == 3)
+
+takeHallPass(0)
+assert (passesOut == BS(true, false, false, false, false) & passesAvailable == 2)
+
+takeHallPass(2)
+assert (passesOut == BS(true, false, true, false, false) & passesAvailable == 1)
+
+takeHallPass(4)
+assert (passesOut == BS(true, false, true, false, true) & passesAvailable == 0)
+
+returnHallPass(2)
+assert (passesOut == BS(true, false, false, false, true) & passesAvailable == 1)
+
+returnHallPass(0)
+assert (passesOut == BS(false, false, false, false, true) & passesAvailable == 2)
