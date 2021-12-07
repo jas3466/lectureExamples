@@ -2,6 +2,7 @@
 
 import org.sireum.logika._
 
+//returns a count of the trues in the sequence
 l"""{
     //pos starts at the sequence size
     //every time, subtract one
@@ -15,7 +16,10 @@ l"""{
 }"""
 
 //list: (true,false,true)
-//sumPasses(list, 3) -> (??? What?)
+//sumPasses(list, 3) -> (2)
+    1 + sumPasses(list, 2)
+        sumPasses(list, 1)
+            1 + sumPasses(list, 1)
 
 val totalPasses: Z = 3
 var passesAvailable: Z = totalPasses
@@ -28,11 +32,33 @@ var passesOut: BS = BS(false,false,false,false,false)
 l"""{
     invariant
         //LIST THE GLOBAL INVARIANTS
+        passesAvailable >= 0
+        passesAvailable <= totalPasses
+        passesAvailable.size == 5
+        totalPasses == passesAvailable + sumPasses(passesOut, passesOut.size)
 }"""
 
 def takeHallPass(studentPos: Z): Unit = {
     l"""{
         //WRITE THE FUNCTION CONTRACT
+        requires
+            //the studentPos is a valid index
+            studentPos >= 0 ^ studentPos < passesOut.size
+
+            //there is at least one hall pass available
+            passesAvailable > 0
+
+            //that student doesn't have a hall pass out yet
+            passesOut(studentPos) == false
+        modifies passesOut, passesAvailable
+        ensures
+            passesAvailable.size == 5
+            passesAvailable == passesAvailable_in -1
+            passesOut(studentPos) == true
+
+            //every other position hasn't changed
+            A x: (0..<passesAvailable.size) x != studentPos ->
+                            passesAvailable(x) == passesAvailable_in(x)
     }"""
     passesOut(studentPos) = true
     passesAvailable = passesAvailable - 1
@@ -41,6 +67,26 @@ def takeHallPass(studentPos: Z): Unit = {
 def returnHallPass(studentPos: Z): Unit = {
     l"""{
         //WRITE THE FUNCTION CONTRACT
+        requires
+            //there was at least one hall pass out
+            passesAvailable < totalPasses
+
+            //studentPos is a valid index
+            studentPos >= 0 ^ studentPos < passesOut.size
+
+            //that student has a pass out
+            passesOut(studentPos) == true
+        modifies passesAvailable, passesOut
+        ensures
+            passesAvailable == passesAvailable_in + 1
+            passesOut.size == 5
+
+             passesOut(studentPos) == false
+
+            //every other position hasn't changed
+            A x: (0..<passesAvailable.size) x != studentPos ->
+                            passesAvailable(x) == passesAvailable_in(x)
+
     }"""
     passesOut(studentPos) = false
     passesAvailable = passesAvailable + 1
@@ -53,11 +99,19 @@ assert(passesAvailable == 3)
 takeHallPass(0)
 assert (passesOut == BS(true, false, false, false, false) & passesAvailable == 2)
 
+
+//what if I did takeHallPass(0) again?
+
+
 takeHallPass(2)
 assert (passesOut == BS(true, false, true, false, false) & passesAvailable == 1)
 
 takeHallPass(4)
 assert (passesOut == BS(true, false, true, false, true) & passesAvailable == 0)
+
+
+//what if I did takeHallPass(1) now?
+
 
 returnHallPass(2)
 assert (passesOut == BS(true, false, false, false, true) & passesAvailable == 1)

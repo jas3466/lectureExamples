@@ -1,5 +1,6 @@
 import org.sireum.logika._
 
+//global variables
 var balance: Z = 0
 var elite: B = false
 val eliteMin: Z = 1000000 //$1M is the minimum balance for elite status
@@ -8,12 +9,25 @@ val eliteMin: Z = 1000000 //$1M is the minimum balance for elite status
 l"""{
     invariant
         //balance should be non-negative
+        balance >= 0
+
         //elite status should reflect if balance is at least a million
+        elite == (balance >= eliteMin)
 }"""
 
 def deposit(amount: Z): Unit = {
     l"""{
         //COMPLETE THE FUNCTION CONTRACT
+        requires
+            amount >= 0
+        modifies balance, elite
+        ensures
+            //list how global variables are modified
+            //new balance = original balance + amount
+            balance == balance_in + amount
+
+            //don't need to list elite update, as it's already
+            //a global invariant
     }"""
 
     balance = balance + amount
@@ -27,6 +41,10 @@ def deposit(amount: Z): Unit = {
 def withdraw(amount: Z): Unit = {
     l"""{
         //COMPLETE THE FUNCTION CONTRACT
+        requires amount <= balance
+        modifies balance, elite
+        ensures
+            balance == balance_in - amount
     }"""
 
     balance = balance - amount
@@ -48,17 +66,25 @@ def withdraw(amount: Z): Unit = {
 
 deposit(500000)
 
-//and this is what we have as premises when the function returns
-//1) global invariant still holds
-//2) the postcondition from the function holds
-
-assert(balance == 500000 & !elite)
+//the postcondition is true
+//the global invariants are true
 
 
+assert(balance == 500000 & elite == false)
 
-deposit(600000)
-assert(balance == 1100000 & elite)
-withdraw(150000)
-assert(balance == 950000 & !elite)
-deposit(200000)
-assert(balance == 1150000 & elite)
+
+
+//what can we assert here?
+
+
+
+deposit(500000)
+//assert?
+
+assert(balance == 1000000 & elite == true)
+
+
+//withdraw 2000000?
+
+//precondition is not satisfied
+//withdraw(2000000)
