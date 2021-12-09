@@ -1,0 +1,115 @@
+HW 14 is due tonight
+
+result -> (the sequence is sorted)
+!result -> (the sequence is not sorted)
+
+Final exam is Wednesday, December 15
+    2:00-3:50 pm in the usual lecture classroom (DUE 1109)
+
+Cumulative.
+Similar format as the midterms exams (multiple choice + open-ended).
+Can bring one 8.5"x11" sheet of handwritten notes.
+
+The final exam is worth 25% of your overall grade.
+
+/////////////////////////////////////
+
+- Introduction to logical reasoning
+    - Basic logical reasoning
+    - Knights and knaves puzzles
+- Propositional logic
+    - Translating between English and propositional logic
+    - Truth tables, top-level operators,
+            tautology/contingent/contradictory, satisfiability
+    - Propositional logic proofs
+        and, or, implies, and negation rules
+    - Semantic entailment (uses truth tables)
+        p semantically entails q if p->q is a tautology
+    - Logical equivalence (with proofs and with truth tables)
+    - Soundness and completeness
+        soundness: anything that I can prove (with proof rules)
+                    is actually true
+
+        completeness: everything that is true can be proved
+- Predicate logic
+    - Universal and existential quantifiers
+    - Translating between English and predicate logic
+    - Predicate logic proofs with Ai, Ae, Ei, and Ee rules
+        (including those with more than one variable
+        and/or nested quantifiers)
+- Programming logic (I'll specify manual/symexe for each problem)
+    - Assumes and asserts
+    - The subst rules
+    - The algebra rule
+    - Verifying asserts with variables/expressions/updating variables
+        (including claims with division and modulus)
+    - Verifying programs with if/else statements, functions,
+        loops, recursion, sequences, and global variables/invariants
+    - Function contracts
+    - Loop invariant blocks
+    - Verifying "test code" that calls a function
+    - Interpreting and using Logika facts
+    - Full vs. partial correctness, and proving termination
+
+
+I strongly recommend reworking previous exams,
+going through previous exam review problems, and reworking
+previous homework problems.
+
+These practice problems do not cover all exam topics.
+
+/////////////////////////////////////////
+
+Translations:
+
+I drive to work only if it is below freezing or my bicycle is broken.
+
+p: I drive to work
+q: It is below freezing
+r: My bicycle is broken
+
+if [neither exception is true], then I don't drive to work.
+
+!(q V r) -> !p
+
+
+OR
+
+p -> (q V r)
+
+
+
+////////////////
+
+Domain: food
+
+C(x, y): x costs more than y
+P(x): x is produce
+V(x): x is a vegetable
+F(x): x is a frozen food
+
+All vegetables are produce.
+
+A x (V(x) -> P(x))
+
+
+Some vegetables are not frozen.
+
+E x (V(x) ^ !F(x))
+
+
+Not all produce foods are vegetables.
+
+there exists a produce that is not a vegetable
+
+E x (P(x) ^ !V(x))
+!(A x (P(x) -> V(x)))
+
+There is no frozen food that costs more than every vegetable.
+
+!(E x (F(x) ^ (A y (V(y) -> C(x, y)))))
+
+
+//////////////////
+
+See other practice problems.

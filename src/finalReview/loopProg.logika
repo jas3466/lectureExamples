@@ -1,0 +1,76 @@
+import org.sireum.logika._
+
+//MANUAL MODE
+
+def diff(big: Z, small: Z): Z = {
+    l"""{
+        requires big >= small
+        ensures result == big-small
+    }"""
+
+    //PREMISES:
+        //big >= small
+
+    var count: Z = 0
+    var cur: Z = big
+
+    //PREMISES:
+        //big >= small
+        //count == 0
+        //cur == big
+    //SHOW:
+        //the loop invariant: count == (big-cur)
+
+    while (cur != small) {
+        l"""{
+            invariant
+                count == (big-cur)
+            modifies count, cur
+        }"""
+
+        //PREMISES:
+            //the loop invariant: count == (big-cur)
+            //big >= small
+            //cur != small (the loop condition)
+
+        cur = cur - 1
+        count = count + 1
+
+        //SHOW:
+            //loop invariant is still true; count == (big-cur)
+    }
+
+    //PREMISES:
+        //the loop invariant: count == (big-cur)
+        //!(cur != small) (the loop condition is false)
+        //big >= small
+
+    //SHOW:
+        //the postcondition
+        //count == big-small
+
+    return count
+}
+
+/////////// Test code ////////////////
+
+var one: Z = 10
+
+l"""{
+    1. one == 10            premise
+    2. one+4 >= one         algebra 1
+
+    //need first param >= second param
+    //one+4 >= one
+}"""
+
+var answer: Z = diff(one+4, one)
+
+l"""{
+    //result == big-small
+    1. answer = one+4-one           premise
+    2. one == 10                    premise
+    3. answer == 4                  algebra 1 2
+}"""
+
+assert(answer == 4)
